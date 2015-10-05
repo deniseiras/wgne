@@ -1,0 +1,5 @@
+modelo			comando grads		tipo
+ecmwf			mag(v10u,v10v)		netcdf
+meteofrance		mag(ZWIND,MWIND)	h5
+nasa			mag(u10m,v10m)		netcdf
+ncep			mag(u10m,v10m)		grib

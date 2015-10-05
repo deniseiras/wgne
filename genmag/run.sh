@@ -1,0 +1,1 @@
+opengrads -lc "genwmag.gs"

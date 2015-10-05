@@ -1,0 +1,2 @@
+nasa    /stornext/online8/exp-dmd/aerosols/nasa       nasa_2d*.nc   /scratchout/grupos/brams/home/denis.eiras/output
+ncep    /stornext/online8/exp-dmd/aerosols/ncep       pgbf*.ctl     /scratchout/grupos/brams/home/denis.eiras/output
