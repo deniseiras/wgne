@@ -1,7 +1,6 @@
 program get_station_coords
   use benchmarking
   use date_utils
-  use inmet_stations
 !  use iso_varying_string
 
   implicit none
