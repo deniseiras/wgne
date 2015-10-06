@@ -2,17 +2,103 @@ program get_station_coords
   use benchmarking
   use date_utils
   use inmet_stations
+!  use iso_varying_string
 
   implicit none
   
   character(:), allocatable :: inputFileName, inputFilePattern, outputFileName&
-  ,outputFilePattern, basePath, inputPath, outputPath, dateString
+  ,outputFilePattern, basePath, inputPath, outputPath, dateString, mask, numVarsChar
 
   character :: dummy
-
+  
   integer :: lines, l, variables, iErr, inputFile, outputFile, varIdx
   type(Date)          :: period
   type(GregorianDate) :: date_current, date_start, date_end
+
+  character(len=30), allocatable, dimension(:) :: vars !all vars
+  real(KIND=SELECTED_REAL_KIND(8,2)), allocatable, dimension(:) :: varsTypeReal !all vars Real
+
+  
+!************************ DEFINIR !!! **********************************
+  character(len=*), parameter :: undef="-999999"
+  integer :: numVars=49
+
+  
+  ! Define the period of interest.
+  date_start = GregorianDate(2012, 4, 10, 0, 0, 0)
+  date_end   = GregorianDate(2012, 5, 01, 23, 0, 0)
+  call makeDate(date_start, date_end, period)
+  
+  ! Loop through the period with 1-hour increments.
+  do while (.not. period%iterationOver)
+    
+    if(allocated(vars)) then
+      deallocate(vars)
+      deallocate(varsTypeReal)
+    end if
+    allocate(vars(numVars))
+    allocate(varsTypeReal(numVars))
+
+    dateString = formatDateYYYYMMDDHHMM(getCurrentDate(period))
+    print*, dateString
+
+    basePath='/home2/denis/magnitude/observation'
+    inputPath='dat'
+    outputPath='stationvars'
+    inputFilePattern = 'bufr_09800001013001'
+    inputFileName = basePath//"/"//inputPath//'/'//inputFilePattern//&
+      dateString//'.dat'
+    outputFilePattern = 'station_vars_bufr_09800001013001'
+    outputFileName = basePath//'/'//outputPath//'/'//outputFilePattern//&
+      dateString//'.dat'
+    print*, "lendo arquivo ", inputFileName
+    
+		inputFile = getFreeUnit()
+		open(inputFile, file=inputFileName)
+		outputFile = getFreeUnit()
+		open(outputFile, file=outputFileName, status='replace')
+	
+		! Skip the header.
+		read(inputFile,*) dummy
+    read(inputFile,*) dummy
+
+		! Loop through each station and read only latitude/longitude/temperature.
+    lines = 2
+		do l=1, 1000000000
+
+      read(inputFile,*,ERR=99,END=100) vars
+
+      do varIdx = 1, numVars
+        if(trim(vars(varIdx))=='Null') then
+          vars(varIdx)=undef
+        end if
+        read(vars(varIdx),*) varsTypeReal(varIdx)  
+      end do
+
+!       numVarsChar="123456789   "
+!       write(numVarsChar,*) numVars
+!       print*
+!       print*, len(numVarsChar)
+!       numVarsChar=trim(numVarsChar)
+!       print*, len(numVarsChar)
+
+!       mask='('//trim(numVarsChar)//'(F10.2,X))'
+!       print*
+!       print*, mask
+
+      mask='(49(F10.2,X))'
+  		write(outputFile,mask) varsTypeReal
+		end do
+    99 print*, "ERRO na leitura !!!!!"
+    100 print*, "arquivo de saída: ", outputFileName, " ", l, " linhas lidas!"
+	
+		close(inputFile)
+		close(outputFile)
+  	call incrementBySeconds(3600, period)
+	end do
+
+end program get_station_coords
+    
 
 !   character(len=30), allocatable, dimension(:) :: blockNumber !WMO BLOCK NUMBER (NUMERIC)
 !   character(len=30), allocatable, dimension(:) :: stationNumber !WMO STATION NUMBER (NUMERIC)
@@ -63,79 +149,3 @@ program get_station_coords
 !   character(len=30), allocatable, dimension(:) :: cloudBaseHeightN4 !HEIGHT OF BASE OF CLOUD (M)
 !   character(len=30), allocatable, dimension(:) :: precipTotal6h !TOTAL PRECIPITATION PAST 6 HOURS (KG/M**2)
 !   character(len=30), allocatable, dimension(:) :: snowTotalDepth !TOTAL SNOW DEPTH (M)
-
-  character(len=30), allocatable, dimension(:) :: vars !TOTAL SNOW DEPTH (M)
-  character(len=*), parameter :: undef="-999999"
-  integer :: numVars=49
-  
-  ! Define the period of interest.
-  date_start = GregorianDate(2012, 4, 10, 0, 0, 0)
-  date_end   = GregorianDate(2012, 4, 10, 0, 0, 0)
-
-!  date_end   = GregorianDate(2012, 5, 01, 23, 0, 0)
-  call makeDate(date_start, date_end, period)
-  
-  ! Loop through the period with 1-hour increments.
-  do while (.not. period%iterationOver)
-    
-    if(allocated(vars)) then
-      deallocate(vars)
-    end if
-    allocate(vars(numVars))
-
-    dateString = formatDateYYYYMMDDHHMM(getCurrentDate(period))
-    print*, dateString
-
-    basePath='/home2/denis/magnitude/observation'
-    inputPath='dat'
-    outputPath='stationvars'
-    inputFilePattern = 'bufr_09800001013001'
-    inputFileName = basePath//"/"//inputPath//'/'//inputFilePattern//&
-      dateString//'.dat'
-    outputFilePattern = 'station_vars_bufr_09800001013001'
-    outputFileName = basePath//'/'//outputPath//'/'//outputFilePattern//&
-      dateString//'.dat'
-    call msg("arquivo de entrada: "//inputFileName)
-    call msg("arquivo de saída: "//outputFileName)
-
-		inputFile = getFreeUnit()
-		open(inputFile, file=inputFileName)
-		outputFile = getFreeUnit()
-		open(outputFile, file=outputFileName, status='replace')
-	
-		! Skip the header.
-		read(inputFile,*) dummy
-    print*, dummy
-    read(inputFile,*) dummy
-    print*, dummy
-
-		! Loop through each station and read only latitude/longitude/temperature.
-    lines = 2
-		do l=1, lines
-
-      read(inputFile,*,iostat=iErr) vars
-
-      if(iErr>0) then
-        call msg("Erro: ")
-        print*, iErr
-      end if
-
-      do varIdx = 1, numVars
-        if(trim(vars(varIdx))=='Null') then
-          vars(varIdx)=undef
-        end if
-      end do
-
-			!write(outputFile,'(49(F7.2, X))') 
-      write(outputFile,*) vars
-
-		end do
-	
-		close(inputFile)
-		close(outputFile)
-  	call incrementBySeconds(3600, period)
-	end do
-
-
-end program get_station_coords
-
