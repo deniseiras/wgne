@@ -1,38 +1,50 @@
-program get_station_coords
+! Lê os arquivos .dat, gerados a partir dos arquivos do tipo BUFR, através do
+! programa bufrscan (INPE) e gera arquivos de saída contendo os valores de n
+! variáveis 
+!
+! Compilar: ./compile.sh
+!
+! Uso:
+!     ./generateVars.x <pathEntrada> <pathSaida> <numVariaveis>
+! Ex: ./generateVars.x "/home/usr/dirEntrada" "/home/usr/dirSaida" 49
+!
+
+program get_station_vars
   use benchmarking
   use date_utils
-!  use iso_varying_string
 
   implicit none
   
-  character(:), allocatable :: inputFileName, inputFilePattern, outputFileName&
-  ,outputFilePattern, inputPath, outputPath, dateString, mask, numVarsChar
-
-  character :: dummy
+  character(len=255) :: argInPath, argOutPath, argNumVars
   
-  integer :: lines, l, variables, iErr, inputFile, outputFile, varIdx
+  character(:), allocatable :: inputFileName, inputFilePattern, outputFileName&
+  ,outputFilePattern, inputPath, outputPath, dateString, outputMask, numVarsChar
+  integer :: lines, l, variables, iErr, inputFile, outputFile, varIdx, numVars
   type(Date)          :: period
   type(GregorianDate) :: date_current, date_start, date_end
 
   character(len=30), allocatable, dimension(:) :: vars !all vars
   real(KIND=SELECTED_REAL_KIND(8,2)), allocatable, dimension(:) :: varsTypeReal !all vars Real
+  character :: dummy
 
-  character(len=255) :: basePath
-  
 !************************ DEFINIR !!! **********************************
   character(len=*), parameter :: undef="-999999"
-  integer :: numVars=49
-
-!    basePath='/home2/denis/magnitude/observation'
-  call getarg(1,basePath)
-  basePath=trim(basePath)
-  print*, "basePath = '", basePath, "'"
   
-  inputPath='dat'
-  outputPath='stationvars'
+  call getarg(1,argInPath)
+  call getarg(2,argOutPath)
+  call getarg(3,argNumVars)
+
+  inputPath=argInPath
+  inputPath=trim(inputPath)
+  outputPath=argOutPath
+  outputPath=trim(outputPath)
+  numVarsChar=argNumVars
+  numVarsChar=trim(numVarsChar)
+  read(numVarsChar,*) numVars
+  outputMask='('//numVarsChar//'(F10.2,X))'
+
   inputFilePattern = 'bufr_09800001013001'
   outputFilePattern = 'station_vars_bufr_09800001013001'
-    
   
   ! Define the period of interest.
   date_start = GregorianDate(2012, 4, 10, 0, 0, 0)
@@ -50,13 +62,9 @@ program get_station_coords
     allocate(varsTypeReal(numVars))
 
     dateString = formatDateYYYYMMDDHHMM(getCurrentDate(period))
-    print*, dateString
-
-    inputFileName = basePath//"/"//inputPath//'/'//inputFilePattern//&
-      dateString//'.dat'
-    outputFileName = basePath//'/'//outputPath//'/'//outputFilePattern//&
-      dateString//'.dat'
-    print*, "lendo arquivo ", inputFileName
+    inputFileName = inputPath//'/'//inputFilePattern//dateString//'.dat'
+    outputFileName = outputPath//'/'//outputFilePattern//dateString//'.dat'
+    print*, "lendo arquivo ...", NEW_LINE("A"), inputFileName
     
 		inputFile = getFreeUnit()
 		open(inputFile, file=inputFileName)
@@ -67,42 +75,26 @@ program get_station_coords
 		read(inputFile,*) dummy
     read(inputFile,*) dummy
 
-		! Loop through each station and read only latitude/longitude/temperature.
-    lines = 2
 		do l=1, 1000000000
-
       read(inputFile,*,ERR=99,END=100) vars
-
       do varIdx = 1, numVars
         if(trim(vars(varIdx))=='Null') then
           vars(varIdx)=undef
         end if
         read(vars(varIdx),*) varsTypeReal(varIdx)  
       end do
-
-!       numVarsChar="123456789   "
-!       write(numVarsChar,*) numVars
-!       print*
-!       print*, len(numVarsChar)
-!       numVarsChar=trim(numVarsChar)
-!       print*, len(numVarsChar)
-
-!       mask='('//trim(numVarsChar)//'(F10.2,X))'
-!       print*
-!       print*, mask
-
-      mask='(49(F10.2,X))'
-  		write(outputFile,mask) varsTypeReal
+  		write(outputFile,outputMask) varsTypeReal
 		end do
     99 print*, "ERRO na leitura !!!!!"
-    100 print*, "arquivo de saída: ", outputFileName, " ", l, " linhas lidas!"
+    100 print*, "... gerado arquivo de saída: ",NEW_LINE("A"),outputFileName
+    print*, " linhas lidas: ",l,NEW_LINE("A")
 	
 		close(inputFile)
 		close(outputFile)
   	call incrementBySeconds(3600, period)
 	end do
 
-end program get_station_coords
+end program get_station_vars
     
 
 !   character(len=30), allocatable, dimension(:) :: blockNumber !WMO BLOCK NUMBER (NUMERIC)
