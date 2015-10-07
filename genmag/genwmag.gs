@@ -1,4 +1,6 @@
-* script para criação de arquivos .gra com magnitude do vento
+* script para criação de arquivos .gra com magnitude e direção do vento 
+* pode ser adaptado para gerar quaisquer outras variáveis
+* 
 * a partir de arquivos netcdf 
 * Autor: denis.eiras@inpe.br
 

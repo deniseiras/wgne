@@ -1,1 +1,0 @@
-grads -lc "run lats4d -i ../magnitude/ecmwf/ecmwf_2d_direct_20120905.nc -o ../magnitude/ecmwf/mag_ecmwf_2d_direct_20120905.nc -func mag(v10u,v10v)"

@@ -6,7 +6,7 @@ program get_station_coords
   implicit none
   
   character(:), allocatable :: inputFileName, inputFilePattern, outputFileName&
-  ,outputFilePattern, basePath, inputPath, outputPath, dateString, mask, numVarsChar
+  ,outputFilePattern, inputPath, outputPath, dateString, mask, numVarsChar
 
   character :: dummy
   
@@ -17,11 +17,22 @@ program get_station_coords
   character(len=30), allocatable, dimension(:) :: vars !all vars
   real(KIND=SELECTED_REAL_KIND(8,2)), allocatable, dimension(:) :: varsTypeReal !all vars Real
 
+  character(len=255) :: basePath
   
 !************************ DEFINIR !!! **********************************
   character(len=*), parameter :: undef="-999999"
   integer :: numVars=49
 
+!    basePath='/home2/denis/magnitude/observation'
+  call getarg(1,basePath)
+  basePath=trim(basePath)
+  print*, "basePath = '", basePath, "'"
+  
+  inputPath='dat'
+  outputPath='stationvars'
+  inputFilePattern = 'bufr_09800001013001'
+  outputFilePattern = 'station_vars_bufr_09800001013001'
+    
   
   ! Define the period of interest.
   date_start = GregorianDate(2012, 4, 10, 0, 0, 0)
@@ -41,13 +52,8 @@ program get_station_coords
     dateString = formatDateYYYYMMDDHHMM(getCurrentDate(period))
     print*, dateString
 
-    basePath='/home2/denis/magnitude/observation'
-    inputPath='dat'
-    outputPath='stationvars'
-    inputFilePattern = 'bufr_09800001013001'
     inputFileName = basePath//"/"//inputPath//'/'//inputFilePattern//&
       dateString//'.dat'
-    outputFilePattern = 'station_vars_bufr_09800001013001'
     outputFileName = basePath//'/'//outputPath//'/'//outputFilePattern//&
       dateString//'.dat'
     print*, "lendo arquivo ", inputFileName
