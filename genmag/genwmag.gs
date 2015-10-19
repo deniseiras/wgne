@@ -118,9 +118,6 @@ function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,va
 
   openFile(fileToOpen,fileExt)
   'set gxout shaded'
-  msg('gerando novo arquivo NetCdf 'fileout' ...')
-  'set z 1'
-  'set t 1 last'
   sdfwrite(outputPath,filePattern,varMagDef,magExp)
   sdfwrite(outputPath,filePattern,varWdirDef,wdirExp)
 
@@ -166,8 +163,11 @@ function sdfwrite(outputPath,filePattern,varDef,varExp)
   fileout=outputPath'/'varDef'_'filePattern'.nc'
   msg('tentando remover arquivo NetCdf gerado anteriormente 'fileout'...')
   '!rm 'fileout
-  'set sdfwrite 'fileout
+  msg('gerando novo arquivo NetCdf 'fileout' ...')
+  'set z 1'
+  'set t 1 last'
   'define 'varDef'='varExp
+  'set sdfwrite 'fileout
   'sdfwrite 'varDef
   msg('Arquivo NetCdf 'fileout' gerado com sucesso!')
 return
