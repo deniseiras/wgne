@@ -117,6 +117,7 @@ function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,va
   'close 1'
 
   openFile(fileToOpen,fileExt)
+  'set gxout shaded'
   msg('gerando novo arquivo NetCdf 'fileout' ...')
   'set z 1'
   'set t 1 last'
@@ -236,29 +237,6 @@ function ztRange()
   _tmin = 1
   _tmax = subwrd(tmp,12)
 return
-
-
-function sdfwriteAllVars(filein)
-  say 'abrindo arquivo NETCDF 'filein' para pegar variáveis...'
-  'sdfopen 'filein
-  'set gxout print'
-  'set prnopts %s 5 1'
-  'q ctlinfo'
-  allVars =''
-  resultaux = result
-  tmp = sublin ( resultaux, 9 )
-  varsNum = subwrd(tmp,2)
-  i=10
-  while(i<varsNum)
-    tmp = sublin(resultaux, i)
-    var = subwrd(tmp,1)
-    allVars=allVars+'define 'var'='var'\n'
-    pull pausee
-    i= i + 1
-  endwhile
-  'close 2'
-
-return allVars
 
 function find( str, char )
   ntmp = math_strlen( str )
