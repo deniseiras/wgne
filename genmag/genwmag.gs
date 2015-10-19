@@ -78,13 +78,7 @@ function main(args)
         msg('Detectado arquivo CTL')
         filePattern=substr(fileIn,1,fileInSize-4)
       endif
-      vardef='wmag'
-      fileout=generateNetCdf(pathIn,fileIn,filePattern,fileExt,vardef,magExp,outputPath)
-      visualize(fileout,geraPdf,vardef,animate)
-      vardef='wdir'
-      fileout=generateNetCdf(pathIn,fileIn,filePattern,fileExt,vardef,wdirExp,outputPath)
-      visualize(fileout,geraPdf,vardef,animate)
-
+      fileout=generateNetCdf(pathIn,fileIn,filePattern,fileExt,'wmag',magExp,'wdir',wdirExp,outputPath)
       fileListLines=read(fileListName)
       fileListLine1=sublin(fileListLines,1)
 
@@ -110,10 +104,51 @@ say
 *   encontrar o CTL de mesmo nome. Caso encontre, gera o arquivo NetCdf
 *   contendo a magnitude do vento
 ***********************************************************************
-function generateNetCdf(inputPath,fileIn,filePattern,fileExt,vardef,magExp,outputPath)
+function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,varWdirDef,wdirExp,outputPath)
   
-  fileout=outputPath'/'vardef'_'filePattern'.nc'
   fileToOpen=inputPath'/'fileIn
+  openFile(fileToOpen,fileExt)
+  'set gxout print'
+  'set prnopts %s 5 1'
+  'q ctlinfo'
+  allVars =''
+  resultaux = result
+  say resultaux
+  'close 1'
+
+  openFile(fileToOpen,fileExt)
+  msg('gerando novo arquivo NetCdf 'fileout' ...')
+  'set z 1'
+  'set t 1 last'
+  sdfwrite(outputPath,filePattern,varMagDef,magExp)
+  sdfwrite(outputPath,filePattern,varWdirDef,wdirExp)
+
+  i=6
+  varsNum=0
+  while(varsNum=0)
+    tmp = sublin ( resultaux, i )
+    i=i+1
+    if(subwrd(tmp,1)='vars')
+      varsNum = subwrd(tmp,2)
+    endif
+  endwhile
+
+  lineVars=i-1
+  while(i<=lineVars+varsNum)
+    tmp = sublin(resultaux, i)
+    var = subwrd(tmp,1)
+    equalsStringPos=find(var,"=")
+    if(equalsStringPos>0)
+      var=substr(var,1,equalsStringPos-1)
+    endif
+    sdfwrite(outputPath,filePattern,var,var)
+    i= i + 1
+  endwhile
+  'clear sdfwrite'
+  'close 1'
+return fileout
+
+function openFile(fileToOpen,fileExt)
   if(fileExt='.nc')
     'sdfopen 'fileToOpen
   else
@@ -124,20 +159,17 @@ function generateNetCdf(inputPath,fileIn,filePattern,fileExt,vardef,magExp,outpu
     'open 'fileToOpen
   endif
   msg('Arquivo 'fileToOpen' aberto')
+return
 
+function sdfwrite(outputPath,filePattern,varDef,varExp)
+  fileout=outputPath'/'varDef'_'filePattern'.nc'
   msg('tentando remover arquivo NetCdf gerado anteriormente 'fileout'...')
   '!rm 'fileout
-
-  msg('gerando novo arquivo NetCdf 'fileout' ...')
-  'set z 1'
-  'set t 1 last'
   'set sdfwrite 'fileout
-  'define 'vardef'='magExp
-  'sdfwrite 'vardef
-  'clear sdfwrite'
-  'close 1'
+  'define 'varDef'='varExp
+  'sdfwrite 'varDef
   msg('Arquivo NetCdf 'fileout' gerado com sucesso!')
-return fileout
+return
 
 function fileExists(filename)
   fileExistsList='./fileexist.tmp'
@@ -204,3 +236,38 @@ function ztRange()
   _tmin = 1
   _tmax = subwrd(tmp,12)
 return
+
+
+function sdfwriteAllVars(filein)
+  say 'abrindo arquivo NETCDF 'filein' para pegar variáveis...'
+  'sdfopen 'filein
+  'set gxout print'
+  'set prnopts %s 5 1'
+  'q ctlinfo'
+  allVars =''
+  resultaux = result
+  tmp = sublin ( resultaux, 9 )
+  varsNum = subwrd(tmp,2)
+  i=10
+  while(i<varsNum)
+    tmp = sublin(resultaux, i)
+    var = subwrd(tmp,1)
+    allVars=allVars+'define 'var'='var'\n'
+    pull pausee
+    i= i + 1
+  endwhile
+  'close 2'
+
+return allVars
+
+function find( str, char )
+  ntmp = math_strlen( str )
+  i = 1
+  while( i <= ntmp )
+    tmp = substr(str,i,1)
+    if( tmp = char )
+      return i
+    endif
+    i = i + 1
+  endwhile
+return -1

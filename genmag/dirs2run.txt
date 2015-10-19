@@ -1,4 +1,3 @@
-ecmwf       /home2/denis/magnitude/ecmwf  ecmwf*.nc         /home2/denis/output
-meteofrance /home2/denis/magnitude        meteofrance*.ctl  /home2/denis/output
+ecmwf       /home2/denis/magnitude/ecmwf  ecmwf_2d*.nc      /home2/denis/output
 nasa        /home2/denis/magnitude/nasa   nasa*.nc          /home2/denis/output
 ncep        /home2/denis/magnitude/ncep   pgbf*.ctl         /home2/denis/output
