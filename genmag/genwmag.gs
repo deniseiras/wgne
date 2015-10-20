@@ -105,7 +105,7 @@ say
 *   contendo a magnitude do vento
 ***********************************************************************
 function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,varWdirDef,wdirExp,outputPath)
-  
+  'reinit'
   fileToOpen=inputPath'/'fileIn
   openFile(fileToOpen,fileExt)
   'set gxout print'
@@ -115,12 +115,8 @@ function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,va
   resultaux = result
   say resultaux
   'close 1'
-
-  openFile(fileToOpen,fileExt)
-  'set gxout shaded'
-  sdfwrite(outputPath,filePattern,varMagDef,magExp)
-  sdfwrite(outputPath,filePattern,varWdirDef,wdirExp)
-
+  sdfwrite(outputPath,filePattern,varMagDef,magExp,fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,varWdirDef,wdirExp,fileToOpen,fileExt)
   i=6
   varsNum=0
   while(varsNum=0)
@@ -139,11 +135,9 @@ function generateNetCdf(inputPath,fileIn,filePattern,fileExt,varMagDef,magExp,va
     if(equalsStringPos>0)
       var=substr(var,1,equalsStringPos-1)
     endif
-    sdfwrite(outputPath,filePattern,var,var)
+    sdfwrite(outputPath,filePattern,var,var,fileToOpen,fileExt)
     i= i + 1
   endwhile
-  'clear sdfwrite'
-  'close 1'
 return fileout
 
 function openFile(fileToOpen,fileExt)
@@ -159,27 +153,36 @@ function openFile(fileToOpen,fileExt)
   msg('Arquivo 'fileToOpen' aberto')
 return
 
-function sdfwrite(outputPath,filePattern,varDef,varExp)
+function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt)
   fileout=outputPath'/'varDef'_'filePattern'.nc'
   msg('tentando remover arquivo NetCdf gerado anteriormente 'fileout'...')
   '!rm 'fileout
   msg('gerando novo arquivo NetCdf 'fileout' ...')
-  'set z 1'
+  openFile(fileToOpen,fileExt)
+  'set gxout shaded'
+  ztRange()
+  say 'Dimensoes xmax: '_xmax', ymax: '_ymax', zmax: '_zmax
+  'set x 1 '_xmax
+  'set y 1 '_ymax
+  'set z 1 '_zmax
   'set t 1 last'
   'define 'varDef'='varExp
   'set sdfwrite 'fileout
   'sdfwrite 'varDef
+  'clear sdfwrite'
+  'close 1'
   msg('Arquivo NetCdf 'fileout' gerado com sucesso!')
+  visualize(fileout,0,varDef,0)
 return
 
 function fileExists(filename)
   fileExistsList='./fileexist.tmp'
+  '!rm 'fileExistsList
   '!ls 'filename ' > 'fileExistsList
   file=read(fileExistsList)
   linha=sublin(file,2)
   ret=subwrd(linha,1)
   rc=close(fileExistsList)
-  '!rm 'fileExistsList
 return ret=filename
 
 function msg(messg)
@@ -188,19 +191,17 @@ return
 
 function getMagExp(centertype)
   if(centertype='ecmwf'); magExp='mag(v10u,v10v)';endif
-*    if(centertype='meteofrance'); magExp='mag(zwind,mwind)';endif
-  if(centertype='meteofrance'); magExp='TEMP';endif
+  if(centertype='meteofrance'); magExp='mag(zwind,mwind)';endif
   if(centertype='nasa'|centertype='ncep'); magExp='mag(u10m,v10m)';endif
 return magExp
 
 function getWdirExp(centertype)
   if(centertype='ecmwf'); vardisplay='(180/3.14159) * atan2(v10u,v10v) + 180' ;endif
-* if(centertype='meteofrance'); vardisplay='(180/3.14159) * atan2(ZWIND,MWIND) + 180';endif
-  if(centertype='meteofrance'); vardisplay='TEMP';endif
+  if(centertype='meteofrance'); vardisplay='(180/3.14159) * atan2(zwind,mwind) + 180';endif
   if(centertype='nasa'|centertype='ncep'); vardisplay='(180/3.14159) * atan2(u10m,v10m) + 180';endif
 return vardisplay
 
-function visualize(fileout,geraPdf,vardef,animate)
+function visualize(fileout,geraPdf,varDef,animate)
   'set gxout shaded'
   if(fileout!=0)
     msg('abrindo arquivo NetCdf para verificação ' fileout)
@@ -211,14 +212,14 @@ function visualize(fileout,geraPdf,vardef,animate)
       tt=_tmin
       while(tt<=_tmax)
         'set t 'tt
-        'd 'vardef
+        'd 'varDef
         tt=tt+1
       endwhile
     else
       'q file'
       say result
       'set t '_tmin
-      'd 'vardef
+      'd 'varDef
     endif
     if(geraPdf)
       filepdf=outputPath'/'filePattern'pdf'
@@ -232,6 +233,8 @@ return
 function ztRange()
   'q file'
   tmp = sublin ( result, 5 )
+  _xmax = subwrd(tmp,3)
+  _ymax = subwrd(tmp,6)
   _zmin = 1
   _zmax = subwrd(tmp,9)
   _tmin = 1
