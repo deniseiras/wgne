@@ -164,7 +164,7 @@ function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt)
   say 'Dimensoes xmax: '_xmax', ymax: '_ymax', zmax: '_zmax
   'set x 1 '_xmax
   'set y 1 '_ymax
-  'set z 1 '_zmax
+  'set z 1 1'
   'set t 1 last'
   'define 'varDef'='varExp
   'set sdfwrite 'fileout
