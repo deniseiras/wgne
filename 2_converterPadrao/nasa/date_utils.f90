@@ -38,6 +38,7 @@ module date_utils
   public :: makeInterval
   public :: parseFileName
   public :: formatDate
+  public :: formatDateYYYYMMDDHHMM
   public :: gradsDate
 
   ! ---- TYPE DECLARATIONS.
@@ -623,10 +624,6 @@ contains
     end do
   end subroutine parseFileName
   
-  
-  
-  
-  
   function formatDate(gregDate) result(dateString)
     ! Input.
     type(GregorianDate), intent(in) :: gregDate
@@ -639,6 +636,18 @@ contains
     write(dateString, sformat) gregDate%year, "-", gregDate%month, "-", &
       gregDate%day, "-", gregDate%hour, gregDate%minute
   end function formatDate
+
+  function formatDateYYYYMMDDHHMM(gregDate) result(dateString)
+    ! Input.
+    type(GregorianDate), intent(in) :: gregDate
+    ! Output.
+    character(len=12)               :: dateString
+    character(len=*), parameter     :: sformat = '(i4.4,4(i2.2))'
+
+    write(dateString, sformat) gregDate%year, gregDate%month, &
+      gregDate%day, gregDate%hour, gregDate%minute
+
+  end function formatDateYYYYMMDDHHMM
   
   function gradsDate(gregDate) result(dateString)
     ! Input.

@@ -215,6 +215,7 @@ implicit none
 		call check(nf90_put_att(ncid_out, aodId, '_FillValue', undef))
 		call check(nf90_put_att(ncid_out, aodId, 'coordinates', 'time, lat, lon'))
 
+		x = 2
 
 		!DUST
 
