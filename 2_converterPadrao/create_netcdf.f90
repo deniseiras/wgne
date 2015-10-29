@@ -21,6 +21,7 @@ program create_netcdf
     use nasadust
 
     implicit none
+    character(len=*), parameter :: conventions = "CF-1.6"
 
     integer :: i
     integer :: j
@@ -34,11 +35,6 @@ program create_netcdf
     integer :: timeId
     integer :: varid_in
     integer :: varid_out
-    real(kind=8), dimension(timeIn) :: time_input
-    real(kind=8), dimension(lonIn) :: lon_input
-    real(kind=8), dimension(latIn) :: lat_input
-    real :: undefAux
-    real, dimension(levIn) :: lev_input
 
     integer :: lonOut
     integer :: lon_varid
@@ -48,7 +44,6 @@ program create_netcdf
     integer :: lev_varid
     integer :: timeOut
     integer :: time_varid
-    character(len=1000) :: conventions
     character(len=1000) :: title
     character(len=1000) :: history
     character(len=30) :: units
@@ -96,10 +91,11 @@ program create_netcdf
             lon_input, lonId, lonOut, nc3did_in, ncid_out, time_input, timeId, timeOut, units, varid_in)
         call createGlobalAtributes(comments, conventions, institution, nc3did_in, ncid_out)
 
-        call create3dVarsImpl(latId, levId, lonId, nc3did_in, ncid_out, timeId, undef, varid_in)
+        call create3dVarsImpl(latId, levId, lonId, nc3did_in, ncid_out, timeId, varid_in)
 
         call create2dVars(dateStrDay, i, input2dFile, inputVarsDir, institutionCode, latId, lonId, nc2did_in, ncid_out, timeId,&
-            undefAux, varid_in, vars, varVectorSize)
+            varid_in, vars, varVectorSize)
+
 
         print*, "FINALIZANDO DEFINICAO DE VARIAVIES"
         call check(nf90_enddef(ncid_out))
@@ -195,7 +191,7 @@ contains
     subroutine createGlobalAtributes(comments, conventions, institution, nc3did_in, ncid_out)
         implicit none
         character(*) :: comments
-        character(len=1000) :: conventions
+        character(*) :: conventions
         character(*) :: institution
         integer :: nc3did_in
         integer :: ncid_out
@@ -204,12 +200,11 @@ contains
 
         call check(nf90_put_att(ncid_out, nf90_global, "institution", trim(institution)))
         call check(nf90_put_att(ncid_out, nf90_global, "comments", trim(comments)))
-        call check(nf90_get_att(nc3did_in, nf90_global,"Conventions", conventions))
         call check(nf90_put_att(ncid_out, nf90_global, "Conventions", conventions))
     end subroutine
 
     subroutine create2dVars(dateStrDay, i, input2dFile, inputVarsDir, institutionCode, latId, lonId, nc2did_in, ncid_out,&
-        timeId, undefAux, varid_in, vars, varVectorSize)
+        timeId, varid_in, vars, varVectorSize)
         implicit none
         character(len=8) :: dateStrDay
         integer :: i
@@ -221,7 +216,7 @@ contains
         integer :: nc2did_in
         integer :: ncid_out
         integer :: timeId
-        real :: undefAux
+        real :: undef2d
         integer :: varid_in
         type(varType), allocatable, dimension(:) :: vars
         integer :: varVectorSize
@@ -232,14 +227,12 @@ contains
             call openFile(nc2did_in, input2dFile)
             call check(nf90_inq_varid(nc2did_in,vars(i)%nameIn, varId_in))
             call check(nf90_get_var(nc2did_in, varId_in, vars(i)%value))
-            call check(nf90_get_att(nc2did_in, varId_in,"_FillValue", undefAux))
-            call check(nf90_def_var(ncid_out, vars(i)%nameOut, NF90_REAL, (/lonId, latId, timeId/), vars(i)%id))
+            call check(nf90_get_att(nc2did_in, varId_in,"_FillValue", undef2d))
 
+            call check(nf90_def_var(ncid_out, vars(i)%nameOut, NF90_REAL, (/lonId, latId, timeId/), vars(i)%id))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'standard_name', vars(i)%nameOut))
-        !            call check(nf90_put_att(ncid_out, temp2mId, 'long_name', 'temperature at 2m'))
-        !            call check(nf90_put_att(ncid_out, temp2mId, 'units', 'K'))
-            call check(nf90_put_att(ncid_out, vars(i)%id, '_FillValue', undefAux))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'coordinates', 'time, lat, lon'))
+            call check(nf90_put_att(ncid_out, vars(i)%id, '_FillValue', undef2d))
             call closeFile(nc2did_in)
         end do
     end subroutine

@@ -31,6 +31,7 @@ contains
         implicit none
         integer, intent (in) :: status
         if(status /= nf90_noerr) then
+            print *, "####### ERROR ########"
             print *, trim(nf90_strerror(status))
             print *, status
             stop "Stopped"
