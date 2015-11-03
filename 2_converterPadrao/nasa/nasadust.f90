@@ -51,41 +51,25 @@ contains
         implicit none
 
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='bccmass'
-
-        vars(2)%nameIn='ducmass'
-        vars(3)%nameIn='lwgnt'
-        vars(4)%nameIn='occmass'
-        vars(5)%nameIn='preccon'
-        vars(6)%nameIn='preclsc'
-        vars(7)%nameIn='prectot'
-        vars(8)%nameIn='so4cmass'
-        vars(9)%nameIn='sscmass'
-        vars(10)%nameIn='swgnt'
-        vars(11)%nameIn='t2m'
-        vars(12)%nameIn='totexttau'
+        vars(1)%nameIn='bcmass'
+        vars(2)%nameIn='dustmass'
+        vars(3)%nameIn='dlwf'
+        vars(4)%nameIn='ocmass'
+        vars(5)%nameIn='conv'
+        vars(6)%nameIn='preclsc' !n tem no wgne_disp
+        vars(7)%nameIn='prec'
+        vars(8)%nameIn='so4mass'
+        vars(9)%nameIn='saltmass'
+        vars(10)%nameIn='dswf'
+        vars(11)%nameIn='temp2m'
+        vars(12)%nameIn='aod'
         vars(13)%nameIn='u10m'
         vars(14)%nameIn='v10m'
         vars(15)%nameIn='wdir'
         vars(16)%nameIn='wmag'
+        vars(17)%nameIn='aeromass'
 
-        vars(1)%nameOut='bcmass'
 
-        vars(2)%nameOut='ducmass'
-        vars(3)%nameOut='lwgnt'
-        vars(4)%nameOut='occmass'
-        vars(5)%nameOut='preccon'
-        vars(6)%nameOut='preclsc'
-        vars(7)%nameOut='prectot'
-        vars(8)%nameOut='so4cmass'
-        vars(9)%nameOut='sscmass'
-        vars(10)%nameOut='swgnt'
-        vars(11)%nameOut='t2m'
-        vars(12)%nameOut='totexttau'
-        vars(13)%nameOut='u10m'
-        vars(14)%nameOut='v10m'
-        vars(15)%nameOut='wdir'
-        vars(16)%nameOut='wmag'
 
     end subroutine
 
