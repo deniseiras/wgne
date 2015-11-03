@@ -93,7 +93,7 @@ function main(args)
         if(casetype='smoke')
           fileout=genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath)
         endifif(casetype='pollution')
-          fileout=genEcmwfPollution(fileToOpen,filePattern,fileExt,outputPath)
+          fileout=genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath)
         endif
       endif
       sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt)
@@ -168,8 +168,6 @@ function genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath)
   sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt)
 return fileout
 
 ***********************************************************************
@@ -188,7 +186,7 @@ return fileout
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfPollution(fileToOpen,filePattern,fileExt,outputPath)
+function genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath)
   'reinit'
   sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550+suaod550',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt)
