@@ -1,18 +1,18 @@
-module nasadust
+module ncep
     use netcdf
     use netcdf_utils
     implicit none
 
-    character(*), parameter :: institution='NASA/Goddard' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
-    character(*), parameter :: institutionCode='nasa' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
+    character(*), parameter :: institution='NCEP' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
+    character(*), parameter :: institutionCode='ncep' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
     character(*), parameter :: ccase='dust'
     character(*), parameter :: subcase='interactive'
     character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
-    integer, parameter :: varVectorSize = 16
+    integer, parameter :: varVectorSize = 9
     integer, parameter :: varNameSize = 30
-    integer, parameter :: lonIn=193
-    integer, parameter :: latIn=201
-    integer, parameter :: levIn=15
+    integer, parameter :: lonIn=360
+    integer, parameter :: latIn=181
+    integer, parameter :: levIn=47
     integer, parameter :: timeIn=81
 
     real(kind=8), dimension(timeIn) :: time_input
@@ -51,25 +51,13 @@ contains
         implicit none
 
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='bcmass'
-        vars(2)%nameIn='dustmass'
+        vars(1)%nameIn='conv'
+        vars(2)%nameIn='prec'
         vars(3)%nameIn='dlwf'
-        vars(4)%nameIn='ocmass'
-        vars(5)%nameIn='conv'
-        vars(6)%nameIn='preclsc' !n tem no wgne_disp
-        vars(7)%nameIn='prec'
-        vars(8)%nameIn='so4mass'
-        vars(9)%nameIn='saltmass'
-        vars(10)%nameIn='dswf'
-        vars(11)%nameIn='temp2m'
-        vars(12)%nameIn='aod'
-        vars(13)%nameIn='u10m'
-        vars(14)%nameIn='v10m'
-        vars(15)%nameIn='wdir'
-        vars(16)%nameIn='wmag'
-        vars(17)%nameIn='aeromass'
-
-
+        vars(4)%nameIn='dswf'
+        vars(5)%nameIn='temp2m'
+        vars(6)%nameIn='wdir'
+        vars(7)%nameIn='wmag'
 
     end subroutine
 
@@ -136,4 +124,4 @@ contains
         call closeFile(nc3did_in)
     end subroutine
 
-end module nasadust
+end module ncep

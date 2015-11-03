@@ -1,0 +1,29 @@
+NCEP_2D_e_3D
+
+dset ^pgbf%y4%m2%d2%h2
+index ^pgbf2012041300.idx
+undef 9.999E+20
+title NCEP Study Case 1 - DUST
+*  produced by grib2ctl v0.9.12.5p32l
+dtype grib 255
+options template yrev
+ydef 181 linear -90.000000 1
+xdef 360 linear 0.000000 1.000000
+tdef 81  linear 00Z13apr2012 3hr
+zdef 47 levels
+1000 975 950 925 900 875 850 825 800 775 750 725 700 675 650 625 600 575 550 525 500 475 450 425 400 375 350 325 300 275
+ 250 225 200 175 150 125 100 70 50 30 20 10 7 5 3 2 1 
+vars 13
+conv    0 63,1, 0  ** surface Convective precipitation [kg/m^2]
+prec    0 61,1, 0  ** surface Total precipitation [kg/m^2]
+dlwf    0 205,1, 0  ** surface Downward long wave flux [W/m^2]
+dswf    0 204,1, 0  ** surface Downward short wave flux [W/m^2]
+lwrh   47 251,100,0 ** Longwave radiative heating [K/s]
+lsprec  0 62,1, 0  ** surface Large scale precipitation [kg/m^2]
+rh     47 52,100,0 ** Relative humidity [%]
+sph2m   0 51,105,2 ** 2 m Specific humidity [kg/kg]
+srh    47 250,100,0 ** Solar radiative heating [K/s]
+temp   47 11,100,0 ** Temp. [K]
+temp2m  0 11,105,2 ** 2 m Temp. [K]
+u10m    0 33,105,10 ** 10 m u wind [m/s]
+v10m    0

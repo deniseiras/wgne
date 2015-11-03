@@ -92,7 +92,8 @@ function main(args)
         endif
         if(casetype='smoke')
           fileout=genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath)
-        endifif(casetype='pollution')
+        endif
+        if(casetype='pollution')
           fileout=genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath)
         endif
       endif
@@ -150,18 +151,14 @@ function genNcepAll(fileToOpen,filePattern,fileExt,outputPath)
   sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'dswf','dswf',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'lwrh','lwrh',fileToOpen,fileExt)
 * sdfwrite(outputPath,filePattern,'lsprec','lsprec',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'rh','rh',fileToOpen,fileExt)
 * sdfwrite(outputPath,filePattern,'sph2m','sph2m',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'ttend','srh',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp','temp',fileToOpen,fileExt)
   sdfwrite(outputPath,filePattern,'temp2m','temp2m',fileToOpen,fileExt)
 return fileout
 
-***********************************************************************
-* - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
-***********************************************************************
+************************************************************************
+* lê o arquivo de entrada e escreve as variaveis convertidas no padrao *
+************************************************************************
 function genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath)
   'reinit'
   sdfwrite(outputPath,filePattern,'aod','duaod550',fileToOpen,fileExt)
