@@ -1,18 +1,18 @@
-module ncep
+module ecmwf_smoke
     use netcdf
     use netcdf_utils
     implicit none
 
-    character(*), parameter :: institution='NCEP' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
-    character(*), parameter :: institutionCode='ncep' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
-    character(*), parameter :: ccase='dust'
-    character(*), parameter :: subcase='interactive'
-    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
-    integer, parameter :: varVectorSize = 9
+    character(*), parameter :: institution='ECMWF' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
+    character(*), parameter :: institutionCode='ecmwf' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
+    character(*), parameter :: ccase='smoke'
+    character(*), parameter :: subcase='direct'
+    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case).' !Case and Subcase
+    integer, parameter :: varVectorSize = 8
     integer, parameter :: varNameSize = 30
-    integer, parameter :: lonIn=360
-    integer, parameter :: latIn=181
-    integer, parameter :: levIn=47
+    integer, parameter :: lonIn=720
+    integer, parameter :: latIn=360
+    integer, parameter :: levIn=9
     integer, parameter :: timeIn=81
 
     real(kind=8), dimension(timeIn) :: time_input
@@ -51,13 +51,14 @@ contains
         implicit none
 
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='conv'
-        vars(2)%nameIn='prec'
-        vars(3)%nameIn='dlwf'
-        vars(4)%nameIn='dswf'
-        vars(5)%nameIn='temp2m'
-        vars(6)%nameIn='wdir'
-        vars(7)%nameIn='wmag'
+        vars(1)%nameIn='aod'
+        vars(2)%nameIn='temp2m'
+        vars(3)%nameIn='dswf'
+        vars(4)%nameIn='dlwf'
+        vars(5)%nameIn='prec'
+        vars(6)%nameIn='conv'
+        vars(7)%nameIn='wdir'
+        vars(8)%nameIn='wmag'
 
     end subroutine
 
@@ -79,18 +80,8 @@ contains
 
         print*, "CRIANDO ATRIBUTOS DE VARIAVEIS 3D"
 
-        call check(nf90_inq_varid(nc3did_in,'srh', varId_in))
-        call check(nf90_get_var(nc3did_in, varId_in, ttend))
-        call check(nf90_get_att(nc3did_in, varId_in,"missing_value", undef3d))
-        call check(nf90_def_var(ncid_out, 'ttend', NF90_REAL, (/lonId, latId, levId, timeId/), ttendId))
-        call check(nf90_put_att(ncid_out, ttendId, 'standard_name', 'ttend'))
-        call check(nf90_put_att(ncid_out, ttendId, 'long_name', 'tendency_of_air_temperature_due_to_radiation'))
-        call check(nf90_put_att(ncid_out, ttendId, 'units', 'K/s'))
-        call check(nf90_put_att(ncid_out, ttendId, '_FillValue', undef3d))
-        call check(nf90_put_att(ncid_out, ttendId, 'coordinates', 'time, lev, lat, lon'))
-
         !TEMPERATURA
-        call check(nf90_inq_varid(nc3did_in,'temp', varId_in))
+        call check(nf90_inq_varid(nc3did_in,'t', varId_in))
         call check(nf90_get_var(nc3did_in, varId_in, temp))
         call check(nf90_get_att(nc3did_in, varId_in,"missing_value", undef3d))
         call check(nf90_def_var(ncid_out, 'temp', NF90_REAL, (/lonId, latId, levId, timeId/), tempId))
@@ -101,7 +92,7 @@ contains
         call check(nf90_put_att(ncid_out, tempId, 'coordinates', 'time, lev, lat, lon'))
 
         !UMIDADE RELATIVA
-        call check(nf90_inq_varid(nc3did_in,'rh', varId_in))
+        call check(nf90_inq_varid(nc3did_in,'r', varId_in))
         call check(nf90_get_var(nc3did_in, varId_in, rh))
         call check(nf90_get_att(nc3did_in, varId_in,"missing_value", undef3d))
         call check(nf90_def_var(ncid_out, 'rh', NF90_REAL, (/lonId, latId, levId, timeId/), rhId))
@@ -118,10 +109,9 @@ contains
         integer :: ncid_out
 
         print*, "ESCREVENDO VARIVEIS 3D"
-        call check(nf90_put_var(ncid_out,ttendId, ttend))
         call check(nf90_put_var(ncid_out,tempId, temp))
         call check(nf90_put_var(ncid_out,rhId, rh))
         call closeFile(nc3did_in)
     end subroutine
 
-end module ncep
+end module ecmwf_smoke

@@ -1,0 +1,41 @@
+ECMWF_POLLUTION_3d
+
+netcdf ecmwf_3d_direct_20130110 {
+dimensions:
+  longitude = 720 ;
+  latitude = 361 ;
+  level = 9 ;
+  time = 81 ;
+variables:
+  float longitude(longitude) ;
+    longitude:units = "degrees_east" ;
+    longitude:long_name = "longitude" ;
+  float latitude(latitude) ;
+    latitude:units = "degrees_north" ;
+    latitude:long_name = "latitude" ;
+  int level(level) ;
+    level:units = "millibars" ;
+    level:long_name = "pressure_level" ;
+  int time(time) ;
+    time:units = "hours since 1900-01-01 00:00:0.0" ;
+    time:long_name = "time" ;
+  short t(time, level, latitude, longitude) ;
+    t:scale_factor = 0.0019047883098526 ;
+    t:add_offset = 258.662980406138 ;
+    t:_FillValue = -32767s ;
+    t:missing_value = -32767s ;
+    t:units = "K" ;
+    t:long_name = "Temperature" ;
+    t:standard_name = "air_temperature" ;
+  short r(time, level, latitude, longitude) ;
+    r:scale_factor = 0.00247687482368907 ;
+    r:add_offset = 71.3694424908184 ;
+    r:_FillValue = -32767s ;
+    r:missing_value = -32767s ;
+    r:units = "%" ;
+    r:long_name = "Relative humidity" ;
+    r:standard_name = "relative_humidity" ;
+
+// global attributes:
+    :Conventions = "CF-1.0" ;
+    :history = "2014-03-04 10:12:18 GMT by grib_to_netcdf-1.10.0" ;
