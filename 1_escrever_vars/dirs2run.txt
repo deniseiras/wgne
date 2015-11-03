@@ -1,0 +1,9 @@
+nasa        dust        /home2/denis/magnitude/nasa/dust  nasa_2d*.nc       /home2/denis/output
+ecmwf       dust        /home2/denis/magnitude/ecmwf/dust ecmwf_2d*.nc      /home2/denis/output
+ncep        dust        /home2/denis/magnitude/ncep/dust  pgbf*.ctl         /home2/denis/output
+nasa        smoke        /home2/denis/magnitude/nasa/smoke  nasa_2d*.nc       /home2/denis/output
+ecmwf       smoke        /home2/denis/magnitude/ecmwf/smoke ecmwf_2d*.nc      /home2/denis/output
+ncep        smoke        /home2/denis/magnitude/ncep/smoke  pgbf*.ctl         /home2/denis/output
+nasa        pollution        /home2/denis/magnitude/nasa/pollution  nasa_2d*.nc       /home2/denis/output
+ecmwf       pollution        /home2/denis/magnitude/ecmwf/pollution ecmwf_2d*.nc      /home2/denis/output
+ncep        pollution        /home2/denis/magnitude/ncep/pollution  pgbf*.ctl         /home2/denis/output

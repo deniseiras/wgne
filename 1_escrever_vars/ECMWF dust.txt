@@ -1,0 +1,70 @@
+ECMWF DUST
+
+dimensions:
+  longitude = 720 ;
+  latitude = 361 ;
+  time = 81 ;
+variables:
+  float longitude(longitude) ;
+    longitude:units = "degrees_east" ;
+    longitude:long_name = "longitude" ;
+  float latitude(latitude) ;
+    latitude:units = "degrees_north" ;
+    latitude:long_name = "latitude" ;
+  int time(time) ;
+    time:units = "hours since 1900-01-01 00:00:0.0" ;
+    time:long_name = "time" ;
+  short v10u(time, latitude, longitude) ;
+    v10u:scale_factor = 0.000949590396384861 ;
+    v10u:add_offset = -2.97162805447554 ;
+    v10u:_FillValue = -32767s ;
+    v10u:missing_value = -32767s ;
+    v10u:units = "m s**-1" ;
+    v10u:long_name = "10 metre U wind component" ;
+  short v10v(time, latitude, longitude) ;
+    v10v:scale_factor = 0.000769908160461023 ;
+    v10v:add_offset = 0.359852167501801 ;
+    v10v:_FillValue = -32767s ;
+    v10v:missing_value = -32767s ;
+    v10v:units = "m s**-1" ;
+    v10v:long_name = "10 metre V wind component" ;
+  short v2t(time, latitude, longitude) ;
+    v2t:scale_factor = 0.00180579350177403 ;
+    v2t:add_offset = 257.834859127175 ;
+    v2t:_FillValue = -32767s ;
+    v2t:missing_value = -32767s ;
+    v2t:units = "K" ;
+    v2t:long_name = "2 metre temperature" ;
+  short v2d(time, latitude, longitude) ;
+    v2d:scale_factor = 0.00161631633078707 ;
+    v2d:add_offset = 247.750198921913 ;
+    v2d:_FillValue = -32767s ;
+    v2d:missing_value = -32767s ;
+    v2d:units = "K" ;
+    v2d:long_name = "2 metre dewpoint temperature" ;
+  short ssrd(time, latitude, longitude) ;
+    ssrd:scale_factor = 4855.72227732593 ;
+    ssrd:add_offset = 159102596.138861 ;
+    ssrd:_FillValue = -32767s ;
+    ssrd:missing_value = -32767s ;
+    ssrd:units = "J m**-2" ;
+    ssrd:long_name = "Surface solar radiation downwards" ;
+    ssrd:standard_name = "surface_downwelling_shortwave_flux_in_air" ;
+  short strd(time, latitude, longitude) ;
+    strd:scale_factor = 6732.57601513741 ;
+    strd:add_offset = 220599585.711992 ;
+    strd:_FillValue = -32767s ;
+    strd:missing_value = -32767s ;
+    strd:units = "J m**-2" ;
+    strd:long_name = "Surface thermal radiation downwards" ;
+  short duaod550(time, latitude, longitude) ;
+    duaod550:scale_factor = 7.92284206114371e-05 ;
+    duaod550:add_offset = 2.59599842975435 ;
+    duaod550:_FillValue = -32767s ;
+    duaod550:missing_value = -32767s ;
+    duaod550:units = "~" ;
+    duaod550:long_name = "Dust Aerosol Optical Depth at 550nm" ;
+
+// global attributes:
+    :Conventions = "CF-1.0" ;
+    :history = "2014-03-03 15:20:46 GMT by grib_to_netcdf-1.10.0" ;

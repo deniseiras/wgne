@@ -1,0 +1,1 @@
+opengrads -lc "casevars.gs"
