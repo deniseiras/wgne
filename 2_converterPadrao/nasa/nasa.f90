@@ -1,41 +1,51 @@
 module nasa
+    use date_utils
     use netcdf
     use netcdf_utils
     implicit none
 
     character(*), parameter :: institution='NASA/Goddard' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
     character(*), parameter :: institutionCode='nasa' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
-    character(*), parameter :: ccase='dust'
-    character(*), parameter :: subcase='interactive'
-    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
-    integer, parameter :: varVectorSize = 14
-    integer, parameter :: varNameSize = 30
-    integer, parameter :: lonIn=193
-    integer, parameter :: latIn=201
+    character(*), parameter :: ccase='pollution'
+!    character(*), parameter :: subcase='interactive'
+    character(*), parameter :: subcase='noaerosols'
+    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
+!dust
+!    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 4, 13, 0, 0, 0), date_end   = GregorianDate(2012, 4, 23, 0, 0, 0)
+!    integer, parameter :: lonIn=193
+!    integer, parameter :: latIn=201
+!    integer, parameter :: levIn=15
+!    integer, parameter :: timeIn=81
+!smoke
+!    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 9, 5, 0, 0, 0), date_end   = GregorianDate(2012, 9, 16, 0, 0, 0)
+!    integer, parameter :: lonIn=193
+!    integer, parameter :: latIn=241
+!    integer, parameter :: levIn=15
+!    integer, parameter :: timeIn=6
+!pollution
+    type(GregorianDate), parameter :: date_start = GregorianDate(2013, 1, 7, 0, 0, 0), date_end   = GregorianDate(2013, 1, 21, 0, 0, 0)
+    integer, parameter :: lonIn=194
+    integer, parameter :: latIn=241
     integer, parameter :: levIn=15
     integer, parameter :: timeIn=81
+
+    character(*), parameter :: inputBaseDir='/stornext/online8/exp-dmd/aerosols'
+    character(*), parameter :: inputBaseVarsDir='/stornext/online8/exp-dmd/outputcasevars/stornext/online8/exp-dmd/aerosols/'
+    character(*), parameter :: outputBaseDir='/scratchout/grupos/brams/home/denis.eiras/new_aerosols'
+    integer, parameter :: varVectorSize = 14
+    integer, parameter :: varNameSize = 30
+
 
     real(kind=8), dimension(timeIn) :: time_input
     real(kind=8), dimension(lonIn) :: lon_input
     real(kind=8), dimension(latIn) :: lat_input
     real, dimension(levIn) :: lev_input
 
-!    character(*), parameter :: inputBaseDir='/stornext/online8/exp-dmd/aerosols'
-!    character(*), parameter :: inputVarsDir='/stornext/online8/exp-dmd/wgne_converted/output/stornext/online8/exp-dmd/aerosols'
-!    character(*), parameter :: outputBaseDir='/stornext/online8/exp-dmd/new_aerosols'
-    character(*), parameter :: inputBaseDir='/home2/denis/magnitude'
-    character(*), parameter :: inputBaseVarsDir='/home2/denis/output/home2/denis/magnitude'
-    character(*), parameter :: outputBaseDir='/home2/denis/output/new_aerosols'
-
-
     type varType
         character(len=varNameSize) nameIn
-        character(len=varNameSize) nameOut
         real, dimension(lonIn,latIn,timeIn) :: value
-
         integer :: id
     end type varType
-
     type(varType), allocatable, dimension(:) :: vars
 
     real :: rh(lonIn,latIn,levIn,timeIn)

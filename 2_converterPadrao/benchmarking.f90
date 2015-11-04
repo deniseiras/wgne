@@ -90,11 +90,11 @@ contains
   subroutine initRandomSeed()
 
 #if INTEL
-!    use ifport, only: &
-!      getpid
+    use ifport, only: &
+      getpid
 #endif
 #if PGI
-!    integer, external :: getpid
+    integer, external :: getpid
 #endif
 
     integer, allocatable, dimension(:) :: seed
