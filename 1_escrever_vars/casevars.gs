@@ -12,6 +12,8 @@
 *   - cada linha no formato: centertype inputPathBase fileMask outputpathbase
 *   - onde:
 *     - centertype in (ecmwf, meteofrance, nasa, ncep)
+*     - Dimensão: 2d ou 3d
+*     - Caso: dust/smoke/pollution
 *     - inputPathBase: diretório base a ser percorrido (os subdiretórios serão avaliados)
 *     - fileMask: máscara de procura de arquivos
 *     - outputpathbase: diretório base onde serão escrito os arquivos. O diretório final
@@ -21,11 +23,20 @@
 *         Se o arquivo abc.ctl for encontrado for encontrado em /home/input/ncep/20150101,
 *         o arquivo de saída será gravado em /home/output/home/input/ncep/20150101
 * 
+
 *     - Exemplo arquivo de entrada de entrada
-* ecmwf       /home2/denis/magnitude/ecmwf  ecmwf*.nc         /home2/denis/output/
-* meteofrance /home2/denis/magnitude        meteofrance*.ctl  /home2/denis/output/
-* nasa        /home2/denis/magnitude/nasa   nasa*.nc          /home2/denis/output/
-* ncep        /home2/denis/magnitude/ncep   pgbf*.ctl         /home2/denis/output/
+*nasa   2d       dust            /home2/denis/magnitude/nasa/dust         nasa_2d*.nc       /home2/denis/output
+*ecmwf  2d       dust            /home2/denis/magnitude/ecmwf/dust        ecmwf_2d*.nc      /home2/denis/output
+*ncep   2d       dust            /home2/denis/magnitude/ncep/dust         pgbf*.ctl         /home2/denis/output
+*ncep   3d       dust            /home2/denis/magnitude/ncep/dust         aod*.ctl         /home2/denis/output
+*nasa   2d       smoke            /home2/denis/magnitude/nasa/smoke       nasa_2d*.nc       /home2/denis/output
+*ecmwf  2d       smoke            /home2/denis/magnitude/ecmwf/smoke      ecmwf_2d*.nc      /home2/denis/output
+*ncep   2d       smoke            /home2/denis/magnitude/ncep/smoke       pgbf*.ctl         /home2/denis/output
+*ncep   3d       smoke            /home2/denis/magnitude/ncep/smoke       aod*.ctl         /home2/denis/output
+*nasa   2d       pollution        /home2/denis/magnitude/nasa/pollution   nasa_2d*.nc       /home2/denis/output
+*ecmwf  2d       pollution        /home2/denis/magnitude/ecmwf/pollution  ecmwf_2d*.nc      /home2/denis/output
+*ncep   2d       pollution        /home2/denis/magnitude/ncep/pollution   pgbf*.ctl         /home2/denis/output
+*ncep   3d       pollution        /home2/denis/magnitude/ncep/pollution   aod*.ctl         /home2/denis/output
 
 
 function main(args)
@@ -43,13 +54,16 @@ function main(args)
   while(subwrd(dirs2runLine1,1)=0)
 
     dirs2runLine2=sublin(dirs2RunFile,2)
+
     centertype=subwrd(dirs2runLine2,1)
     magExp = getMagExp(centertype)
     wdirExp = getWdirExp(centertype)
-    casetype=subwrd(dirs2runLine2,2)
-    inputPathBase=subwrd(dirs2runLine2,3)
-    fileMask=subwrd(dirs2runLine2,4)
-    outputPathBase=subwrd(dirs2runLine2,5)
+
+    dimType=subwrd(dirs2runLine2,2)
+    casetype=subwrd(dirs2runLine2,3)
+    inputPathBase=subwrd(dirs2runLine2,4)
+    fileMask=subwrd(dirs2runLine2,5)
+    outputPathBase=subwrd(dirs2runLine2,6)
 
     fileListName='./filelist.tmp'
     
@@ -81,25 +95,30 @@ function main(args)
       endif
       fileToOpen=pathIn'/'fileIn
       if(centertype='nasa')
-        fileout=genNasaAll(fileToOpen,filePattern,fileExt,outputPath)
+        fileout=genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
       endif
       if(centertype='ncep')
-          fileout=genNcepAll(fileToOpen,filePattern,fileExt,outputPath)
+        if(dimType='2d')
+          fileout=genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+        else
+          fileout=genNcep3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+        endif
       endif
       if(centertype='ecmwf')
         if(casetype='dust')
-          fileout=genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath)
+          fileout=genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
         if(casetype='smoke')
-          fileout=genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath)
+          fileout=genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
         if(casetype='pollution')
-          fileout=genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath)
+          fileout=genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
       endif
-      sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt)
-      sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt)
-
+      if(dimType='2d')
+        sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
+        sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
+      endif
       fileListLines=read(fileListName)
       fileListLine1=sublin(fileListLines,1)
 
@@ -123,74 +142,84 @@ say
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genNasaAll(fileToOpen,filePattern,fileExt,outputPath)
+function genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
 
-  sdfwrite(outputPath,filePattern,'bcmass','bccmass*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'aeromass','(bccmass+ducmass+occmass+so4cmass+sscmass)*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dustmass','ducmass*1000',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'bcmass','bccmass*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'aeromass','(bccmass+ducmass+occmass+so4cmass+sscmass)*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dustmass','ducmass*1000',fileToOpen,fileExt,centertype,dimType)
 
-  sdfwrite(outputPath,filePattern,'dlwf','lwgnt*(-1)',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'ocmass','occmass*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'conv','3*3600*preccon',fileToOpen,fileExt)
-*  sdfwrite(outputPath,filePattern,'preclsc','preclsc',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'prec','3*3600*prectot',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'so4mass','so4cmass*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'saltmass','sscmass*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dswf','swgnt',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp2m','t2m',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'aod','totexttau',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'dlwf','lwgnt*(-1)',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'ocmass','occmass*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'conv','3*3600*preccon',fileToOpen,fileExt,centertype,dimType)
+*  sdfwrite(outputPath,filePattern,'preclsc','preclsc',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'prec','3*3600*prectot',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'so4mass','so4cmass*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'saltmass','sscmass*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','swgnt',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','t2m',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'aod','totexttau',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 ***********************************************************************
-* - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
+* - lê o arquivo de entrada 2d e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genNcepAll(fileToOpen,filePattern,fileExt,outputPath)
+function genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
-  sdfwrite(outputPath,filePattern,'conv','conv',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dswf','dswf',fileToOpen,fileExt)
-* sdfwrite(outputPath,filePattern,'lsprec','lsprec',fileToOpen,fileExt)
-* sdfwrite(outputPath,filePattern,'sph2m','sph2m',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp2m','temp2m',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'conv','conv',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','dswf',fileToOpen,fileExt,centertype,dimType)
+* sdfwrite(outputPath,filePattern,'lsprec','lsprec',fileToOpen,fileExt,centertype,dimType)
+* sdfwrite(outputPath,filePattern,'sph2m','sph2m',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','temp2m',fileToOpen,fileExt,centertype,dimType)
+return fileout
+
+***********************************************************************
+* - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
+***********************************************************************
+function genNcep3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+  'reinit'
+  sdfwrite(outputPath,filePattern,'ttend','srh',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp','temp',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'rh','rh',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 ************************************************************************
 * lê o arquivo de entrada e escreve as variaveis convertidas no padrao *
 ************************************************************************
-function genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath)
+function genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
-  sdfwrite(outputPath,filePattern,'aod','duaod550',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'aod','duaod550',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath)
+function genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
-  sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath)
+function genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
-  sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550+suaod550',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt)
-  sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt)
+  sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550+suaod550',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 function openFile(fileToOpen,fileExt)
@@ -206,8 +235,9 @@ function openFile(fileToOpen,fileExt)
   msg('Arquivo 'fileToOpen' aberto')
 return
 
-function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt)
-  fileout=outputPath'/'varDef'_'filePattern'.nc'
+
+function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt,centertype,dimType)
+  fileout=outputPath'/'varDef'_'centertype'_'dimType'_'filePattern'.nc'
   msg('tentando remover arquivo NetCdf gerado anteriormente 'fileout'...')
   '!rm 'fileout
   msg('gerando novo arquivo NetCdf 'fileout' ...')
@@ -217,7 +247,11 @@ function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt)
   say 'Dimensoes xmax: '_xmax', ymax: '_ymax', zmax: '_zmax
   'set x 1 '_xmax
   'set y 1 '_ymax
-  'set z 1 1'
+  if(dimType='3d')
+    'set z 1 '_zmax
+  else
+    'set z 1 1'
+  endif
   'set t 1 last'
   'define 'varDef'='varExp
   'set sdfwrite 'fileout
