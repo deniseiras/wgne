@@ -32,9 +32,11 @@ module nasa
     character(*), parameter :: inputBaseDir='/stornext/online8/exp-dmd/aerosols'
     character(*), parameter :: inputBaseVarsDir='/stornext/online8/exp-dmd/outputcasevars/stornext/online8/exp-dmd/aerosols/'
     character(*), parameter :: outputBaseDir='/scratchout/grupos/brams/home/denis.eiras/new_aerosols'
+    character(*), parameter :: caseDir = institutionCode//'/'//ccase//'/'//subcase
+    character(*), parameter :: inputVarsDir=inputBaseVarsDir//'/'//caseDir
+    
     integer, parameter :: varVectorSize = 14
     integer, parameter :: varNameSize = 30
-
 
     real(kind=8), dimension(timeIn) :: time_input
     real(kind=8), dimension(lonIn) :: lon_input
@@ -54,6 +56,7 @@ module nasa
     integer :: tempId
     real :: ttend(lonIn,latIn,levIn,timeIn)
     integer :: ttendId
+
 
 contains
 
@@ -78,6 +81,24 @@ contains
 
     end subroutine
 
+    function getInput3dVarFileImpl(dateStrDay) result (input3dFile)
+	implicit none
+        character(*), intent(in) :: dateStrDay
+        character(len=255), intent(out) :: input3dFile
+	character(len=255) :: inputDir
+        inputDir=inputBaseDir//'/'//caseDir
+	input3dFile = trim(inputDir)//'/'//institutionCode//'_3d_'//dateStrDay//'_00.nc'
+    end function
+
+    function getInput2dVarFileImpl(varName,dateStrDay) result (input2dFile)
+	implicit none
+        character(*), intent(in) :: dateStrDay
+	character(*), intent(in) :: varName
+        character(len=255), intent(out) :: input2dFile
+	character(len=255) :: inputDir
+        input2dFile=inputVarsDir//'/'//varName//'_'//institutionCode//'_2d_'//dateStrDay//'_00.nc'
+    end function
+    
     subroutine create3dVarsImpl(latId, levId, lonId, nc3did_in, ncid_out, timeId, varid_in)
         implicit none
         integer :: latId
