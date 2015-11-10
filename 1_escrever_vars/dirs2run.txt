@@ -1,2 +1,3 @@
 ncep   2d       dust            /home2/denis/magnitude/ncep/dust         pgbf*.ctl         /home2/denis/output
 ncep   3d       dust            /home2/denis/magnitude/ncep/dust         pgbf*.ctl         /home2/denis/output
+ncep   2d       dust            /home2/denis/magnitude/ncep/dust         aodf*.ctl         /home2/denis/output

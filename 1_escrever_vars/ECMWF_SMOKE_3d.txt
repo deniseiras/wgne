@@ -5,7 +5,7 @@ dimensions:
   longitude = 720 ;
   latitude = 361 ;
   level = 9 ;
-  time = 81 ;
+  time = 81 ; 
 variables:
   float longitude(longitude) ;
     longitude:units = "degrees_east" ;

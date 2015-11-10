@@ -96,29 +96,44 @@ function main(args)
       fileToOpen=pathIn'/'fileIn
       if(centertype='nasa')
         fileout=genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+        if(dimType='2d')
+          sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
+          sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
+        endif
       endif
       if(centertype='ncep')
         if(dimType='2d')
           fileout=genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
+          sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
         else
           fileout=genNcep3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
       endif
       if(centertype='ecmwf')
         if(casetype='dust')
-          fileout=genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          if(dimType='2d')
+            fileout=genEcmwfDust(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+          else 
+            fileout=genEcmwfDust3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+          endif
         endif
         if(casetype='smoke')
-          fileout=genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          if(dimType='2d')
+            fileout=genEcmwfSmoke(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+          else
+            fileout=genEcmwfSmoke3d(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          endif
         endif
         if(casetype='pollution')
-          fileout=genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          if(dimType='2d')
+            fileout=genEcmwfPoll(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+          else
+            fileout=genEcmwfPoll3d(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+          endif
         endif
       endif
-      if(dimType='2d')
-        sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
-        sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
-      endif
+      
       fileListLines=read(fileListName)
       fileListLine1=sublin(fileListLines,1)
 
@@ -188,18 +203,88 @@ return fileout
 ************************************************************************
 * lê o arquivo de entrada e escreve as variaveis convertidas no padrao *
 ************************************************************************
-function genEcmwfDust(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+function genEcmwfDust(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
-  sdfwrite(outputPath,filePattern,'aod','duaod550',fileToOpen,fileExt,centertype,dimType)
-  sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
-  sdfwrite(outputPath,filePattern,'dswf','(ssrd - ssrd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
-  sdfwrite(outputPath,filePattern,'dlwf','(strd - strd(t-1))/10800',fileToOpen,fileExt,centertype,dimType)
+
+* direct  
+  fileNameAux=substr(fileIn,1,13)
+  if(fileNameAux='macc_gaub_2t_')
+    fileToOpen=pathIn'/'fileIn
+    sdfwrite(outputPath,filePattern,'temp2m','no2tsfc',fileToOpen,fileExt,centertype,dimType)
+  endif
+
+* macc_gaub_10u_20120419.ctl e macc_gaub_10v_20120419.ctl
+* mag(no10usfc.2,no10vsfc)
+  if(fileNameAux='macc_gaub_10u') 
+    fileFinal=substr(fileIn,14,26) 
+    file1=pathIn'/macc_gaub_10u'fileFinal
+    file2=pathIn'/macc_gaub_10v'fileFinal
+    openFile(file1,fileExt)
+    openFile(file2,fileExt)
+    sdfwrite2(outputPath,filePattern,'wmag','mag(no10usfc,no10vsfc.2)',centertype,dimType)
+    sdfwrite2(outputPath,filePattern,'wdir', '(180/3.14159) * atan2(no10usfc,no10vsfc.2) + 180',centertype,dimType)
+    'close 2'
+    'close 1'
+  endif
+  if(fileNameAux='macc_gaub_aod') 
+    fileToOpen=pathIn'/'fileIn
+    sdfwrite(outputPath,filePattern,'aod','aod550sfc',fileToOpen,fileExt,centertype,dimType)
+  endif
+  if(fileNameAux='macc_gaub_ssr') 
+*   macc_gaub_ssrd_20120418.ctl
+    fileFinal=substr(fileIn,15,27) 
+    file1=pathIn'/macc_gaub_ssrd'fileFinal
+    file2=pathIn'/macc_gaub_strd'fileFinal
+    openFile(file1,fileExt)
+    openFile(file2,fileExt)
+    sdfwrite2(outputPath,filePattern,'dswf','(ssrdsfc - ssrdsfc(t-1))/10800',centertype,dimType)
+    sdfwrite2(outputPath,filePattern,'dlwf','(strdsfc.2 - strdsfc.2(t-1))/10800',centertype,dimType)
+    'close 2'
+    'close 1'
+  endif
+
+* noaerosol
+  if(fileNameAux='macc_gau8_2t_')
+    fileToOpen=pathIn'/'fileIn
+    sdfwrite(outputPath,filePattern,'temp2m','no2tsfc',fileToOpen,fileExt,centertype,dimType)
+  endif
+
+* macc_gaub_10u_20120419.ctl e macc_gaub_10v_20120419.ctl
+* mag(no10usfc.2,no10vsfc)
+  if(fileNameAux='macc_gau8_10u') 
+    fileFinal=substr(fileIn,14,26) 
+    file1=pathIn'/macc_gau8_10u'fileFinal
+    file2=pathIn'/macc_gau8_10v'fileFinal
+    openFile(file1,fileExt)
+    openFile(file2,fileExt)
+    sdfwrite2(outputPath,filePattern,'wmag','mag(no10usfc,no10vsfc.2)',centertype,dimType)
+    sdfwrite2(outputPath,filePattern,'wdir', '(180/3.14159) * atan2(no10usfc,no10vsfc.2) + 180',centertype,dimType)
+    'close 2'
+    'close 1'
+  endif
+  if(fileNameAux='macc_gau8_aod') 
+    fileToOpen=pathIn'/'fileIn
+    sdfwrite(outputPath,filePattern,'aod','aod550sfc',fileToOpen,fileExt,centertype,dimType)
+  endif
+  if(fileNameAux='macc_gau8_ssr') 
+*   macc_gaub_ssrd_20120418.ctl
+    fileFinal=substr(fileIn,15,27) 
+    file1=pathIn'/macc_gau8_ssrd'fileFinal
+    file2=pathIn'/macc_gau8_strd'fileFinal
+    openFile(file1,fileExt)
+    openFile(file2,fileExt)
+    sdfwrite2(outputPath,filePattern,'dswf','(ssrdsfc - ssrdsfc(t-1))/10800',centertype,dimType)
+    sdfwrite2(outputPath,filePattern,'dlwf','(strdsfc.2 - strdsfc.2(t-1))/10800',centertype,dimType)
+    'close 2'
+    'close 1'
+  endif
+
 return fileout
 
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfSmoke(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+function genEcmwfSmoke(fileToOpen,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
   sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550',fileToOpen,fileExt,centertype,dimType)
   sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
@@ -212,7 +297,7 @@ return fileout
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+function genEcmwfPoll(fileToOpen,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
   sdfwrite(outputPath,filePattern,'aod','omaod550+bcaod550+suaod550',fileToOpen,fileExt,centertype,dimType)
   sdfwrite(outputPath,filePattern,'temp2m','v2t',fileToOpen,fileExt,centertype,dimType)
@@ -221,6 +306,39 @@ function genEcmwfPoll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimTy
   sdfwrite(outputPath,filePattern,'prec','(cp+lsp-cp(t-1)-lsp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
   sdfwrite(outputPath,filePattern,'conv','(cp-cp(t-1))*1000',fileToOpen,fileExt,centertype,dimType)
 return fileout
+
+
+***********************************************************************
+* - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
+***********************************************************************
+function genEcmwfDust3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+  'reinit'
+  fileNameAux=substr(fileIn,1,12)
+  if(fileNameAux='macc_gaub_t_'|fileNameAux='macc_gau8_t_')
+    fileToOpen=pathIn'/'fileIn
+    sdfwrite(outputPath,filePattern,'temp','tmphlev',fileToOpen,fileExt,centertype,dimType)
+  endif
+  return fileout
+***********************************************************************
+* - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
+***********************************************************************
+function genEcmwfSmoke3d(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+  'reinit'
+  sdfwrite(outputPath,filePattern,'temp','t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'rh','r',fileToOpen,fileExt,centertype,dimType)
+return fileout
+***********************************************************************
+* - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
+***********************************************************************
+function genEcmwfPoll3d(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+  'reinit'
+  sdfwrite(outputPath,filePattern,'temp','t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'rh','r',fileToOpen,fileExt,centertype,dimType)
+return fileout
+
+
+
+
 
 function openFile(fileToOpen,fileExt)
   if(fileExt='.nc')
@@ -262,6 +380,29 @@ function sdfwrite(outputPath,filePattern,varDef,varExp,fileToOpen,fileExt,center
   visualize(fileout,0,varDef,0)
 return
 
+function sdfwrite2(outputPath,filePattern,varDef,varExp,centertype,dimType)
+  fileout=outputPath'/'varDef'_'centertype'_'dimType'_'filePattern'.nc'
+  msg('tentando remover arquivo NetCdf gerado anteriormente 'fileout'...')
+  '!rm 'fileout
+  msg('gerando novo arquivo NetCdf 'fileout' ...')
+  'set gxout shaded'
+  ztRange()
+  say 'Dimensoes xmax: '_xmax', ymax: '_ymax', zmax: '_zmax
+  'set x 1 '_xmax
+  'set y 1 '_ymax
+  if(dimType='3d')
+    'set z 1 '_zmax
+  else
+    'set z 1 1'
+  endif
+  'set t 1 last'
+  'define 'varDef'='varExp
+  'set sdfwrite 'fileout
+  'sdfwrite 'varDef
+  'clear sdfwrite'
+  msg('Arquivo NetCdf 'fileout' gerado com sucesso!')
+return
+
 function fileExists(filename)
   fileExistsList='./fileexist.tmp'
   '!rm 'fileExistsList
@@ -277,13 +418,11 @@ function msg(messg)
 return
 
 function getMagExp(centertype)
-  if(centertype='ecmwf'); magExp='mag(v10u,v10v)';endif
   if(centertype='meteofrance'); magExp='mag(zwind,mwind)';endif
   if(centertype='nasa'|centertype='ncep'); magExp='mag(u10m,v10m)';endif
 return magExp
 
 function getWdirExp(centertype)
-  if(centertype='ecmwf'); vardisplay='(180/3.14159) * atan2(v10u,v10v) + 180' ;endif
   if(centertype='meteofrance'); vardisplay='(180/3.14159) * atan2(zwind,mwind) + 180';endif
   if(centertype='nasa'|centertype='ncep'); vardisplay='(180/3.14159) * atan2(u10m,v10m) + 180';endif
 return vardisplay

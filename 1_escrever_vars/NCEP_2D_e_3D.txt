@@ -1,4 +1,4 @@
-NCEP_2D_e_3D
+NCEP_2D_e_3D DUST
 
 dset ^pgbf%y4%m2%d2%h2
 index ^pgbf2012041300.idx
