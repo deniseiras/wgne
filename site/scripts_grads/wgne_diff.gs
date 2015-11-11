@@ -4,7 +4,9 @@
 'set display color white'
 'c'
 
-directory='/rede/tupa_expdmd/aerosols'
+directory='/stornext/online8/exp-dmd/new_aerosols'
+
+str = 'nasa dust interactive noaerosols wmag 1 2012 04 13 00 0z13apr2012 1 15 30 1'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -31,63 +33,8 @@ interval=subwrd(str,15)
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
 
 * Set up the filename.
-if (model=bsc)
-  modeltitle='BSC'
-  'sdfopen 'directory'/bsc/'mcase'/'minuend'/bsc_'minuend'_'yy''mm''dd'_reg.nc'
-  'sdfopen 'directory'/bsc/'mcase'/'subtrahend'/bsc_'subtrahend'_'yy''mm''dd'_reg.nc'
-endif
-
-if (model=ecmwf)
-  modeltitle='ECMWF'
-  if (var=temp | var=rh | var=ttend)
-    'sdfopen 'directory'/ecmwf/'mcase'/'minuend'/ecmwf_3d_'minuend'_'yy''mm''dd'.nc'
-    'sdfopen 'directory'/ecmwf/'mcase'/'subtrahend'/ecmwf_3d_'subtrahend'_'yy''mm''dd'.nc'
-  else
-    'sdfopen 'directory'/ecmwf/'mcase'/'minuend'/ecmwf_2d_'minuend'_'yy''mm''dd'.nc'
-    'sdfopen 'directory'/ecmwf/'mcase'/'subtrahend'/ecmwf_2d_'subtrahend'_'yy''mm''dd'.nc'
-  endif
-endif
-
-if (model=jma)
-  modeltitle='JMA'
-  if (var=prec)
-    'sdfopen 'directory'/jma/'mcase'/'minuend'/jma_conv_'yy''mm''dd''hh'.nc'
-    'sdfopen 'directory'/jma/'mcase'/'subtrahend'/jma_conv_'yy''mm''dd''hh'.nc'
-    'sdfopen 'directory'/jma/'mcase'/'minuend'/jma_lsp_'yy''mm''dd''hh'.nc'
-    'sdfopen 'directory'/jma/'mcase'/'subtrahend'/jma_lsp_'yy''mm''dd''hh'.nc'
-  else
-    'sdfopen 'directory'/jma/'mcase'/'minuend'/jma_'var'_'yy''mm''dd''hh'.nc'
-    'sdfopen 'directory'/jma/'mcase'/'subtrahend'/jma_'var'_'yy''mm''dd''hh'.nc'
-  endif
-endif
-
-if (model=meteofrance)
-  modeltitle='Meteo France'
-  'open 'directory'/meteofrance/'mcase'/'minuend'/meteofrance_'yy''mm''dd''hh'.ctl'
-  'open 'directory'/meteofrance/'mcase'/'subtrahend'/meteofrance_'yy''mm''dd''hh'.ctl'
-endif
-
-if (model=nasa)
-  modeltitle='NASA'
-  if (var=temp | var=rh | var=ttend)
-    'sdfopen 'directory'/nasa/'mcase'/'minuend'/nasa_3d_'yy''mm''dd'_'hh'.nc'
-    'sdfopen 'directory'/nasa/'mcase'/'subtrahend'/nasa_3d_'yy''mm''dd'_'hh'.nc'
-  else
-    'sdfopen 'directory'/nasa/'mcase'/'minuend'/nasa_2d_'yy''mm''dd'_'hh'.nc'
-    'sdfopen 'directory'/nasa/'mcase'/'subtrahend'/nasa_2d_'yy''mm''dd'_'hh'.nc'
-  endif
-endif
-
-if (model=ncep)
-  modeltitle='NCEP'
-  if (var=aod)
-    'open 'directory'/ncep/'mcase'/'minuend'/'yy''mm''dd''hh'/aodf'yy''mm''dd''hh'.ctl'
-    'open 'directory'/ncep/'mcase'/'subtrahend'/'yy''mm''dd''hh'/aodf'yy''mm''dd''hh'.ctl'
-  else
-    'open 'directory'/ncep/'mcase'/'minuend'/'yy''mm''dd''hh'/pgbf'yy''mm''dd''hh'.ctl'
-    'open 'directory'/ncep/'mcase'/'subtrahend'/'yy''mm''dd''hh'/pgbf'yy''mm''dd''hh'.ctl'
-  endif
-endif
+'sdfopen 'directory'/'model'/'mcase'/'minuend'/'model'_'mcase'_'minuend'_'yy''mm''dd''hh'00.nc'
+'sdfopen 'directory'/'model'/'mcase'/'subtrahend'/'model'_'mcase'_'subtrahend'_'yy''mm''dd''hh'00.nc'
 
 if (hh=12 & model!=meteofrance)
   'close 1'
@@ -354,178 +301,7 @@ endif
 
 *******************************************************************************
 * Define the output variable.
-if (var=aod)
-  if (model=bsc); vardisplay='dust_aod_550 - dust_aod_550.2'; endif
-  if (model=ecmwf & mcase=dust); vardisplay='duaod550 - duaod550.2'; endif
-  if (model=ecmwf & mcase=pollution)
-    vardisplay='omaod550+bcaod550+suaod550-omaod550.2-bcaod550.2-suaod550.2'
-  endif
-  if (model=ecmwf & mcase=smoke)
-    vardisplay='omaod550+bcaod550-omaod550.2-bcaod550.2'
-  endif
-  if (model=jma); vardisplay='od550aer - od550aer.2' ; endif
-  if (model=nasa); vardisplay='totexttau - totexttau.2' ; endif
-  if (model=ncep); vardisplay='aod - aod.2' ; endif
-endif
-
-if (var=cloud)
-endif
-
-if (var=conv)
-  if (model=ecmwf)
-    'define cp1=(cp-cp(t-1))*1000'
-    'define cp2=(cp.2-cp.2(t-1))*1000'
-    vardisplay='cp1 - cp2'
-  endif
-  if (model=jma); vardisplay='3*3600*(ppci - ppci.2)'; endif
-  if (model=nasa); vardisplay='(preccon - preccon.2)*3*3600' ; endif
-  if (model=ncep); vardisplay='conv - conv.2' ; endif
-endif
-
-if (var=dlwf)
-  if (model=bsc); vardisplay='rlwin - rlwin.2'; endif
-  if (model=ecmwf)
-    'define dlwf1=(strd - strd(t-1))/10800'
-    'define dlwf2=(strd.2 - strd.2(t-1))/10800'
-    vardisplay='dlwf1 - dlwf2'
-  endif
-  if (model=jma); vardisplay='dlwb - dlwb.2' ; endif
-  if (model=meteofrance)
-    'define dlwf1=(surfraythr - surfraythr(t-1))/10800'
-    'define dlwf2=(surfraythr.2 - surfraythr.2(t-1))/10800'
-    vardisplay='dlwf1 - dlwf2'
-  endif
-  if (model=nasa); vardisplay='lwgnt*(-1) - lwgnt.2*(-1)'; endif
-  if (model=ncep); vardisplay='dlwf - dlwf.2' ; endif
-endif
-
-if (var=dswf)
-  if (model=bsc); vardisplay='rswin - rswin.2'; endif
-  if (model=ecmwf)
-    'define dswf1=(ssrd - ssrd(t-1))/10800'
-    'define dswf2=(ssrd.2 - ssrd.2(t-1))/10800'
-    vardisplay='dswf1 - dswf2'
-  endif
-  if (model=jma); vardisplay='dswb - dswb.2' ; endif
-  if (model=meteofrance)
-    'define dswf1=(surfraysol - surfraysol(t-1))/10800'
-    'define dswf2=(surfraysol.2 - surfraysol.2(t-1))/10800'
-    vardisplay='dswf1 - dswf2'
-  endif
-  if (model=nasa); vardisplay='swgnt - swgnt.2' ; endif
-  if (model=ncep); vardisplay='dswf - dswf.2' ; endif
-endif
-
-if (var=aeromass)
-  if (model=jma); vardisplay='(loadaer - loadaer.2)*1000' ; endif
-  if (model=nasa)
-    'define aeromass1=bccmass+ducmass+occmass+so4cmass+sscmass'
-    'define aeromass2=bccmass.2+ducmass.2+occmass.2+so4cmass.2+sscmass.2'
-    vardisplay='(aeromass1-aeromass2)*1000'
-  endif
-endif
-
-if (var=bcmass)
-  if (model=nasa); vardisplay='(bccmass-bccmass.2)*1000'; endif
-endif
-
-if (var=ocmass)
-  if (model=nasa); vardisplay='(occmass-occmass.2)*1000'; endif
-endif
-
-if (var=so4mass)
-  if (model=nasa); vardisplay='(so4cmass-so4cmass.2)*1000'; endif
-endif
-
-if (var=saltmass)
-  if (model=nasa); vardisplay='(sscmass-sscmass.2)*1000'; endif
-endif
-
-if (var=dustmass)
-  if (model=bsc); vardisplay='(dust_load - dust_load.2)*1000'; endif
-  if (model=jma); vardisplay='(loaddust - loaddust.2)*1000' ; endif
-  if (model=nasa); vardisplay='(ducmass - ducmass.2)*1000' ; endif
-endif
-
-if (var=prec)
-  if (model=ecmwf)
-    'define prec1=(cp-cp(t-1)+lsp-lsp(t-1))*1000'
-    'define prec2=(cp.2-cp.2(t-1)+lsp.2-lsp.2(t-1))*1000'
-    vardisplay='prec1 - prec2'
-  endif
-  if (model=jma); vardisplay='3*3600*(ppci + ppli.3 - ppci.2 -ppli.4)'; endif
-  if (model=nasa); vardisplay='(prectot - prectot.2)*3*3600' ; endif
-  if (model=ncep); vardisplay='prec - prec.2' ; endif
-endif
-
-if (var=rh)
-  if (model=bsc); vardisplay='100*(rh - rh.2)'; endif
-  if (model=ecmwf); vardisplay='r - r.2'; endif
-  if (model=jma); vardisplay='rh - rh.2' ; endif
-  if (model=meteofrance); vardisplay='100*(HUM - HUM.2)'; endif
-  if (model=nasa); vardisplay='rh - rh.2' ; endif
-  if (model=ncep); vardisplay='rh - rh.2' ; endif
-endif
-
-if (var=temp)
-  if (model=bsc); vardisplay='tsl - tsl.2'; endif
-  if (model=ecmwf); vardisplay='t - t.2'; endif
-  if (model=jma); vardisplay='t - t.2'; endif
-  if (model=meteofrance); vardisplay='TEMP - TEMP.2'; endif
-  if (model=nasa); vardisplay='t - t.2'; endif
-  if (model=ncep); vardisplay='temp - temp.2'; endif  
-endif
-
-if (var=temp2m)
-  if (model=bsc); vardisplay='t2 - t2.2'; endif
-  if (model=ecmwf); vardisplay='v2t - v2t.2'; endif
-  if (model=jma); vardisplay='ta - ta.2' ; endif
-  if (model=meteofrance); vardisplay='SURFTEMP - SURFTEMP.2' ; endif
-  if (model=nasa); vardisplay='t2m - t2m.2' ; endif
-  if (model=ncep); vardisplay='temp2m - temp2m.2' ; endif
-endif
-
-if (var=ttend)
-  if (model=bsc); vardisplay='rtt - rtt.2'; endif
-  if (model=meteofrance); vardisplay='TTENDRAD - TTENDRAD.2' ; endif
-  if (model=nasa); vardisplay='dtdtrad - dtdtrad.2' ; endif
-  if (model=ncep); vardisplay='srh - srh.2'; endif
-endif
-
-if (var=wdir)
-*  wdir = (180/3.14159) * atan2(u,v) + 180
-  if (model=bsc); vardisplay='dir10 - dir10.2'; endif
-  if (model=ecmwf)
-    'define wdir1 = (180/3.14159) * atan2(v10u,v10v) + 180'
-    'define wdir2 = (180/3.14159) * atan2(v10u.2,v10v.2) + 180'
-    vardisplay='wdir1 - wdir2'
-  endif
-  if (model=jma); vardisplay='wdir - wdir.2'; endif
-  if (model=meteofrance)
-    'define wdir1 = (180/3.14159) * atan2(ZWIND,MWIND) + 180'
-    'define wdir2 = (180/3.14159) * atan2(ZWIND.2,MWIND.2) + 180'
-    vardisplay='wdir1 - wdir2'
-  endif
-  if (model=nasa)
-    'define wdir1 = (180/3.14159) * atan2(u10m,v10m) + 180'
-    'define wdir2 = (180/3.14159) * atan2(u10m.2,v10m.2) + 180'
-    vardisplay='wdir1 - wdir2'
-  endif
-  if (model=ncep)
-    'define wdir1 = (180/3.14159) * atan2(u10m,v10m) + 180'
-    'define wdir2 = (180/3.14159) * atan2(u10m.2,v10m.2) + 180'
-    vardisplay='wdir1 - wdir2'
-  endif
-endif
-
-if (var=wmag)
-  if (model=bsc); vardisplay='spd10 - spd10.2'; endif
-  if (model=ecmwf); vardisplay='mag(v10u,v10v) - mag(v10u.2,v10v.2)'; endif
-  if (model=jma); vardisplay='u10 - u10.2'; endif
-  if (model=meteofrance); vardisplay='mag(ZWIND,MWIND) - mag(ZWIND.2,MWIND.2)'; endif
-  if (model=nasa); vardisplay='mag(u10m,v10m) - mag(u10m.2,v10m.2)'; endif
-  if (model=ncep); vardisplay='mag(u10m,v10m) - mag(u10m.2,v10m.2)'; endif
-endif
+vardisplay=''var' - 'var'.2'
 
 * Check if a file was opened.
 'q file'
