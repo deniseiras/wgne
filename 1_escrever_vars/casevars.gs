@@ -95,10 +95,12 @@ function main(args)
       endif
       fileToOpen=pathIn'/'fileIn
       if(centertype='nasa')
-        fileout=genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         if(dimType='2d')
+          fileout=genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
           sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
           sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
+        else
+          fileout=genNasa3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
       endif
       if(centertype='ncep')
@@ -177,10 +179,22 @@ function genNasaAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType
 return fileout
 
 ***********************************************************************
+* - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
+***********************************************************************
+function genNasa3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+  'reinit'
+  sdfwrite(outputPath,filePattern,'ttend','dtdtrad',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp','t',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'rh','rh',fileToOpen,fileExt,centertype,dimType)
+return fileout
+
+***********************************************************************
 * - lê o arquivo de entrada 2d e escreve as variaveis convertidas no padrao
 ***********************************************************************
 function genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
+
+****** TODO  **** if file = aod, fazer var aod
   sdfwrite(outputPath,filePattern,'conv','conv',fileToOpen,fileExt,centertype,dimType)
   sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt,centertype,dimType)
   sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt,centertype,dimType)
