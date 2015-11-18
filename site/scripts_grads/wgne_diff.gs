@@ -6,7 +6,7 @@
 
 directory='/stornext/online8/exp-dmd/new_aerosols'
 
-str = 'nasa dust interactive noaerosols wmag 1 2012 04 13 00 0z13apr2012 1 15 30 1'
+str = 'nasa smoke interactive noaerosols temp2m 1 2012 09 05 00 0z07sep2012 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90'
 
 * Participant's name.
 model=subwrd(str,1)

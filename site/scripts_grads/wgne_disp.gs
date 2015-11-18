@@ -7,7 +7,7 @@
 
 directory='/stornext/online8/exp-dmd/new_aerosols'
 
-str = 'nasa dust interactive temp2m 1 2012 04 13 00 0z13apr2012 1 15 30 1'
+str = 'nasa smoke interactive temp 1 2012 09 05 00 03z05sep2012 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 09z05sep2012'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -28,12 +28,13 @@ scale=subwrd(str,11)
 minvalue=subwrd(str,12)
 maxvalue=subwrd(str,13)
 interval=subwrd(str,14)
+fctOriginal=subwrd(str,15)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
 
+
 * Set up the filename.
 'sdfopen 'directory'/'model'/'mcase'/'scase'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
-
 'set time 'fct
 
 * Check for the presence of aerosols.
@@ -364,7 +365,7 @@ else
   'set strsiz 0.18'
   'draw string 4.25 10.9 'vartitle
   'draw string 4.25 10.6 'modeltitle' 'aerotitle
-  'draw string 4.25 10.1 Forecast: 'fct
+  'draw string 4.25 10.1 Forecast: 'fctOriginal
   if (mm=01); mmm='JAN' ; endif
   if (mm=02); mmm='FEB' ; endif
   if (mm=03); mmm='MAR' ; endif
