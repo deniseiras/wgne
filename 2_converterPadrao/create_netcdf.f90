@@ -21,7 +21,7 @@ program create_netcdf
     use date_utils
     use netcdf
     use netcdf_utils
-    use ecmwf_all
+    use ncep
 
     implicit none
     character(len=*), parameter :: conventions = "CF-1.6"
@@ -29,8 +29,6 @@ program create_netcdf
     integer :: i
     integer :: j
     integer :: t
-    integer :: nc3did_in
-    integer :: nc2did_in
     integer :: ncid_out
     integer :: lonId
     integer :: latId
@@ -79,7 +77,7 @@ program create_netcdf
         outputFile=trim(outputDir)//'/'//institutionCode//'_'//ccase//'_'//subcase//'_'//dateStrMinute//'.nc'
         call createFile(ncid_out, outputFile)
         
-        call create3dAtributes(dateStrDay,latIn,levIn,lonIn,timeIn,lat_input,latId,lev_input,levId,&
+        call create3dAtributes(dateStrDay,latIn,levIn,lonIn,timeIn3d,lat_input,latId,lev_input,levId,&
             lon_input,lonId,ncid_out,time_input,timeId)
 
 	call create3dVars(dateStrDay, institutionCode, latId, lonId, timeId, levId, ncid_out, vars3d, vars3dVectorSize)
@@ -91,7 +89,7 @@ program create_netcdf
         print*, "FINALIZANDO DEFINICAO DE VARIAVIES"
         call check(nf90_enddef(ncid_out))
 
-        call write3dAtributes(latIn, levIn, lonIn, timeIn, lat_input, latId, lev_input, levId, lon_input, lonId, ncid_out,&
+        call write3dAtributes(latIn, levIn, lonIn, timeIn3d, lat_input, latId, lev_input, levId, lon_input, lonId, ncid_out,&
             time_input, timeId)
 
         print*, "ESCREVENDO VARIVEIS 3D"
@@ -137,7 +135,6 @@ contains
             call check(nf90_get_var(nc2did_in, varId_in, vars(i)%value))
             call check(nf90_get_att(nc2did_in, varId_in,"_FillValue", undef2d))
 !            call check(nf90_get_att(nc2did_in, varId_in,"missing_value", undef2d))
-
             call check(nf90_def_var(ncid_out, trim(vars(i)%nameIn), NF90_REAL, (/lonId, latId, timeId/), vars(i)%id))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'standard_name', trim(vars(i)%nameIn)))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'coordinates', 'time, lat, lon'))
@@ -182,14 +179,14 @@ contains
         end do
     end subroutine
 
-    subroutine create3dAtributes(dateStrDay,latIn,levIn,lonIn,timeIn,lat_input,latId,lev_input,levId,&
+    subroutine create3dAtributes(dateStrDay,latIn,levIn,lonIn,timeIn3d,lat_input,latId,lev_input,levId,&
         lon_input,lonId,ncid_out,time_input,timeId)
         implicit none
 	character(len=8), intent(in) :: dateStrDay
         integer, intent(in) :: latIn
         integer, intent(in) :: levIn
         integer, intent(in) :: lonIn
-        integer, intent(in) :: timeIn
+        integer, intent(in) :: timeIn3d
         real(kind=8), intent(out) :: lat_input(latIn)
         integer, intent(out) :: latId
         real, intent(out) :: lev_input(levIn)
@@ -197,8 +194,10 @@ contains
         real(kind=8), intent(out) :: lon_input(lonIn)
         integer, intent(out) :: lonId
         integer, intent(in):: ncid_out
-        real(kind=8), intent(out) :: time_input(timeIn)
+        real(kind=8), intent(out) :: time_input(timeIn3d)
         integer, intent(out) :: timeId
+	integer :: nc3did_in
+        integer :: nc2did_in
 
         integer :: latOut
         integer :: levOut
@@ -207,19 +206,22 @@ contains
         character(len=30) :: units
         integer :: varid_in
 
-        print*, "CRIANDO ATRIBUTOS 3D DIMENSÃO"
+	
+        print*, "CRIANDO ATRIBUTOS 3D"
 	!todos arquivos têm mesmas características, pego o primeiro
-        input3dFile=getInput3dVarFileImpl(trim(vars3d(2)%nameIn),dateStrDay)
+        input3dFile=getInput3dVarFileImpl(trim(vars3d(1)%nameIn),dateStrDay)
+        input2dFile=getInput2dVarFileImpl(trim(vars(1)%nameIn),dateStrDay)
         call openFile(nc3did_in,input3dFile)
+	call openFile(nc2did_in,input2dFile)
 
         !TEMPO
-        call check(nf90_inq_varid(nc3did_in, 'time', varId_in))
-        call check(nf90_get_var(nc3did_in, varId_in, time_input))
+        call check(nf90_inq_varid(nc2did_in, 'time', varId_in))
+        call check(nf90_get_var(nc2did_in, varId_in, time_input))
         call check(nf90_def_dim(ncid_out, 'time', timeIn, timeOut))
         call check(nf90_def_var(ncid_out, 'time', NF90_REAL, timeOut, timeId))
         call check(nf90_put_att(ncid_out, timeId, 'long_name', 'time'))
         call check(nf90_put_att(ncid_out, timeId, 'standard_name', 'time'))
-        call check(nf90_get_att(nc3did_in, varid_in,'units', units)) 
+        call check(nf90_get_att(nc2did_in, varid_in,'units', units)) 
         call check(nf90_put_att(ncid_out, timeId, 'units', trim(units)))
         call check(nf90_put_att(ncid_out, timeId, 'calendar', 'standard'))
         !NIVEIS
@@ -258,13 +260,13 @@ contains
         call check(nf90_put_att(ncid_out, latId, 'axis', 'Y'))
     end subroutine
 
-    subroutine write3dAtributes(latIn,levIn,lonIn,timeIn,lat_input,latId,lev_input,levId,lon_input,lonId,ncid_out,&
+    subroutine write3dAtributes(latIn,levIn,lonIn,timeIn3d,lat_input,latId,lev_input,levId,lon_input,lonId,ncid_out,&
         time_input,timeId)
         implicit none
         integer, intent(in) :: latIn
         integer, intent(in) :: levIn
         integer, intent(in) :: lonIn
-        integer, intent(in) :: timeIn
+        integer, intent(in) :: timeIn3d
         real(kind=8), intent(in) :: lat_input(latIn)
         integer, intent(in) :: latId
         real, intent(in) :: lev_input(levIn)
@@ -272,7 +274,7 @@ contains
         real(kind=8), intent(in) :: lon_input(lonIn)
         integer, intent(in) :: lonId
         integer, intent(in) :: ncid_out
-        real(kind=8), intent(in) :: time_input(timeIn)
+        real(kind=8), intent(in) :: time_input(timeIn3d)
         integer, intent(in) :: timeId
 
         print*, "ESCREVENDO VARIVEIS DE DIMENSÃO 3d"

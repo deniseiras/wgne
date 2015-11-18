@@ -7,15 +7,15 @@ module ncep
 !    character(*), parameter :: ccase='dust'
 !    character(*), parameter :: ccase='smoke'
     character(*), parameter :: ccase='pollution'
-!    character(*), parameter :: subcase='interactive'
-    character(*), parameter :: subcase='noaerosols'
+    character(*), parameter :: subcase='interactive'
+!    character(*), parameter :: subcase='noaerosols'
 
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
 !    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
 !    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with no aerosol interaction.' !Case and Subcase
-!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
-    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
+    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
+!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
 
 !dust
 !    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 4, 13, 0, 0, 0), date_end   = GregorianDate(2012, 4, 23, 0, 0, 0)
@@ -23,18 +23,21 @@ module ncep
 !    integer, parameter :: latIn=181
 !    integer, parameter :: levIn=47
 !    integer, parameter :: timeIn=81
+!    integer, parameter :: timeIn3d=81
 !smoke
 !    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 9, 5, 0, 0, 0), date_end   = GregorianDate(2012, 9, 15, 0, 0, 0)
 !    integer, parameter :: lonIn=360
 !    integer, parameter :: latIn=181
 !    integer, parameter :: levIn=47
 !    integer, parameter :: timeIn=41
+!    integer, parameter :: timeIn3d=41
 !pollution
     type(GregorianDate), parameter :: date_start = GregorianDate(2013, 1, 7, 0, 0, 0), date_end   = GregorianDate(2013, 1, 21, 0, 0, 0)
     integer, parameter :: lonIn=360
     integer, parameter :: latIn=181
     integer, parameter :: levIn=47
     integer, parameter :: timeIn=81
+    integer, parameter :: timeIn3d=81
 
     character(*), parameter :: inputBaseVarsDir='/stornext/online8/exp-dmd/outputcasevars/stornext/online8/exp-dmd/aerosols/'
     character(*), parameter :: outputBaseDir='/scratchout/grupos/brams/home/denis.eiras/new_aerosols'
@@ -56,9 +59,9 @@ module ncep
         integer :: id
     end type var2dType
 
-   type var3dType
+    type var3dType
         character(len=varNameSize) nameIn
-        real, dimension(lonIn,latIn,levIn,timeIn) :: value
+        real, dimension(lonIn,latIn,levIn,timeIn3d) :: value
         integer :: id
 	character(len=100) longName
         character(len=10) units
@@ -72,13 +75,14 @@ contains
     subroutine initialize2dVars()
         implicit none
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='conv'
-        vars(2)%nameIn='prec'
-        vars(3)%nameIn='dlwf'
-        vars(4)%nameIn='dswf'
-        vars(5)%nameIn='temp2m'
-        vars(6)%nameIn='wdir'
-        vars(7)%nameIn='wmag'
+        vars(1)%nameIn='aod'
+        vars(2)%nameIn='conv'
+        vars(3)%nameIn='prec'
+        vars(4)%nameIn='dlwf'
+        vars(5)%nameIn='dswf'
+        vars(6)%nameIn='temp2m'
+        vars(7)%nameIn='wdir'
+        vars(8)%nameIn='wmag'
     end subroutine
 
     subroutine initialize3dVars()
@@ -103,8 +107,11 @@ contains
 	character(*), intent(in) :: varName
         character(*), intent(in) :: dateStrDay
         character(len=255), intent(out) :: input2dFile
-	character(len=255) :: inputDir
-        input2dFile=inputVarsDir//'/'//dateStrDay//'00/'//varName//'_'//institutionCode//'_2d_'//'pgbf'//dateStrDay//'00.nc'
+	if(varName=='aod') then
+	        input2dFile=inputVarsDir//'/'//dateStrDay//'00/'//varName//'_'//institutionCode//'_2d_'//'aodf'//dateStrDay//'00.nc'
+	else
+	        input2dFile=inputVarsDir//'/'//dateStrDay//'00/'//varName//'_'//institutionCode//'_2d_'//'pgbf'//dateStrDay//'00.nc'
+        endif
     end function
 
     function getInput3dVarFileImpl(varName,dateStrDay) result (input3dFile)
@@ -112,7 +119,6 @@ contains
 	character(*), intent(in) :: varName
         character(*), intent(in) :: dateStrDay
         character(len=255), intent(out) :: input3dFile
-	character(len=255) :: inputDir
         input3dFile=inputVarsDir//'/'//dateStrDay//'00/'//varName//'_'//institutionCode//'_3d_'//'pgbf'//dateStrDay//'00.nc'
     end function
 
