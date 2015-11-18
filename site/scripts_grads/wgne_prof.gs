@@ -4,7 +4,8 @@
 'set display color white'
 'c'
 
-directory='/rede/tupa_expdmd/aerosols'
+directory='/stornext/online8/exp-dmd/new_aerosols'
+str = 'nasa dust interactive temp 1 15 2012 04 13 00 15z13apr2012 35 30 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 15z13apr2012'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -30,51 +31,11 @@ scale=subwrd(str,14)
 minvalue=subwrd(str,15)
 maxvalue=subwrd(str,16)
 interval=subwrd(str,17)
+fctOriginal=subwrd(str,18)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
-
 * Set up the filename.
-if (model=bsc)
-  modeltitle='BSC'
-  'sdfopen 'directory'/bsc/'mcase'/'scase'/bsc_'scase'_'yy''mm''dd'_reg.nc' 
-endif
-
-if (model=ecmwf)
-  modeltitle='ECMWF'
-  if (var=temp | var=rh | var=ttend)
-    'sdfopen 'directory'/ecmwf/'mcase'/'scase'/ecmwf_3d_'scase'_'yy''mm''dd'.nc'
-  else
-    'sdfopen 'directory'/ecmwf/'mcase'/'scase'/ecmwf_2d_'scase'_'yy''mm''dd'.nc'
-  endif
-endif
-
-if (model=jma)
-  modeltitle='JMA'
-  'sdfopen 'directory'/jma/'mcase'/'scase'/jma_'var'_'yy''mm''dd''hh'.nc'
-endif
-
-if (model=meteofrance)
-  modeltitle='Meteo France'
-  'open 'directory'/meteofrance/'mcase'/'scase'/meteofrance_'yy''mm''dd''hh'.ctl' 
-endif
-
-if (model=ncep)
-  modeltitle='NCEP'
-  if (var=aod)
-    'open 'directory'/ncep/'mcase'/'scase'/'yy''mm''dd''hh'/aodf'yy''mm''dd''hh'.ctl'
-  else
-    'open 'directory'/ncep/'mcase'/'scase'/'yy''mm''dd''hh'/pgbf'yy''mm''dd''hh'.ctl'
-  endif
-endif
-
-if (model=nasa)
-  modeltitle='NASA'
-  if (var=temp | var=rh | var=ttend)
-    'sdfopen 'directory'/nasa/'mcase'/'scase'/nasa_3d_'yy''mm''dd'_'hh'.nc'
-  else
-    'sdfopen 'directory'/nasa/'mcase'/'scase'/nasa_2d_'yy''mm''dd'_'hh'.nc'
-  endif
-endif
+'sdfopen 'directory'/'model'/'mcase'/'scase'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
 
 if (hh=12 & model!=meteofrance)
   'close 1'
@@ -190,30 +151,7 @@ endif
 if (var=cloud)
 endif
 
-if (var=rh)
-  if (model=bsc); vardisplay='rh*100'; endif
-  if (model=ecmwf); vardisplay='r'; endif
-  if (model=jma); vardisplay='rh' ; endif
-  if (model=meteofrance); vardisplay='HUM*100'; endif
-  if (model=nasa); vardisplay='rh' ; endif
-  if (model=ncep); vardisplay='rh' ; endif
-endif
-
-if (var=temp)
-  if (model=bsc); vardisplay='tsl'; endif
-  if (model=ecmwf); vardisplay='t'; endif
-  if (model=jma); vardisplay=t; endif
-  if (model=meteofrance); vardisplay='TEMP'; endif
-  if (model=nasa); vardisplay='t'; endif
-  if (model=ncep); vardisplay='temp'; endif
-endif
-
-if (var=ttend)
-  if (model=bsc); vardisplay='rtt'; endif
-  if (model=meteofrance); vardisplay='TTENDRAD' ; endif
-  if (model=nasa); vardisplay='dtdtrad' ; endif
-  if (model=ncep); vardisplay='srh'; endif
-endif
+vardisplay=var
 
 * Check if a file was opened.
 'q file'
@@ -247,7 +185,7 @@ else
   'set string 1 tc'
   'draw string 4.25 11 'vartitle
   'draw string 4.25 10.7 'modeltitle' 'aerotitle
-  'draw string 4.25 10.1 Forecast: 'fct
+  'draw string 4.25 10.1 Forecast: 'fctOriginal
   'q dims'
   if (mm=01); mmm='JAN' ; endif
   if (mm=02); mmm='FEB' ; endif

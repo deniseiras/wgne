@@ -29,6 +29,7 @@ scale=subwrd(str,12)
 minvalue=subwrd(str,13)
 maxvalue=subwrd(str,14)
 interval=subwrd(str,15)
+fctOriginal=subwrd(str,16)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
 
@@ -341,7 +342,7 @@ else
   'set strsiz 0.18'
   'draw string 4.25 10.9 'vartitle
   'draw string 4.25 10.6 'modeltitle' 'aerotitle
-  'draw string 4.25 10.1 Forecast: 'fct
+  'draw string 4.25 10.1 Forecast: 'fctOriginal
   if (mm=01); mmm='JAN' ; endif
   if (mm=02); mmm='FEB' ; endif
   if (mm=03); mmm='MAR' ; endif
