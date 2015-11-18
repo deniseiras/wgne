@@ -105,9 +105,14 @@ function main(args)
       endif
       if(centertype='ncep')
         if(dimType='2d')
-          fileout=genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
-          sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
-          sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
+          if(substr(filePattern,1,3)='aod')
+          'reinit'
+            sdfwrite(outputPath,filePattern,'aod','aod',fileToOpen,fileExt,centertype,dimType)
+          else
+            fileout=genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
+            sdfwrite(outputPath,filePattern,'wmag',magExp,fileToOpen,fileExt,centertype,dimType)
+            sdfwrite(outputPath,filePattern,'wdir',wdirExp,fileToOpen,fileExt,centertype,dimType)
+          endif
         else
           fileout=genNcep3dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimType)
         endif
@@ -198,16 +203,11 @@ function genNcep2dAll(fileToOpen,filePattern,fileExt,outputPath,centertype,dimTy
 * sdfwrite(outputPath,filePattern,'lsprec','lsprec',fileToOpen,fileExt,centertype,dimType)
 * sdfwrite(outputPath,filePattern,'sph2m','sph2m',fileToOpen,fileExt,centertype,dimType)
 
-****** TODO  **** if file = aod, fazer var aod
-  if(substr(filePattern,1,3)='aod')
-    sdfwrite(outputPath,filePattern,'aod','aod',fileToOpen,fileExt,centertype,dimType)
-  else
-    sdfwrite(outputPath,filePattern,'conv','conv',fileToOpen,fileExt,centertype,dimType)
-    sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt,centertype,dimType)
-    sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt,centertype,dimType)
-    sdfwrite(outputPath,filePattern,'dswf','dswf',fileToOpen,fileExt,centertype,dimType)
-    sdfwrite(outputPath,filePattern,'temp2m','temp2m',fileToOpen,fileExt,centertype,dimType)
-  endif
+  sdfwrite(outputPath,filePattern,'conv','conv',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'prec','prec',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dlwf','dlwf',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'dswf','dswf',fileToOpen,fileExt,centertype,dimType)
+  sdfwrite(outputPath,filePattern,'temp2m','temp2m',fileToOpen,fileExt,centertype,dimType)
 return fileout
 
 ***********************************************************************
