@@ -21,7 +21,7 @@ program create_netcdf
     use date_utils
     use netcdf
     use netcdf_utils
-    use ncep
+    use ecmwf_all
 
     implicit none
     character(len=*), parameter :: conventions = "CF-1.6"
@@ -56,8 +56,15 @@ program create_netcdf
     character(len=255) :: input3dFile
     character(len=255) :: input2dFile
 
+
+    real(kind=8), dimension(timeIn3d) :: time_input
+    real(kind=8), dimension(lonIn) :: lon_input
+    real(kind=8), dimension(latIn) :: lat_input
+    real, dimension(levIn) :: lev_input
+
     call initialize2dVars()
     call initialize3dVars()
+
     !gerador de datas
     call makeDate(date_start, date_end, period)
 
@@ -74,13 +81,14 @@ program create_netcdf
         print*, "CRIANDO ARQUIVO DE SAÍDA"
         outputDir=trim(outputBaseDir)//'/'//trim(caseDir)
 	call system("mkdir -p "//outputDir)
-        outputFile=trim(outputDir)//'/'//institutionCode//'_'//ccase//'_'//subcase//'_'//dateStrMinute//'.nc'
+!        outputFile=trim(outputDir)//'/'//institutionCode//'_'//ccase//'_'//subcase//'_'//dateStrMinute//'.nc'
+        outputFile=trim(outputDir)//'/'//institutionCode//'_'//'dust'//'_'//subcase//'_'//dateStrMinute//'.nc'
         call createFile(ncid_out, outputFile)
         
         call create3dAtributes(dateStrDay,latIn,levIn,lonIn,timeIn3d,lat_input,latId,lev_input,levId,&
             lon_input,lonId,ncid_out,time_input,timeId)
 
-	call create3dVars(dateStrDay, institutionCode, latId, lonId, timeId, levId, ncid_out, vars3d, vars3dVectorSize)
+    	call create3dVars(dateStrDay, institutionCode, latId, lonId, timeId, levId, ncid_out, vars3d, vars3dVectorSize)
 
         call create2dVars(dateStrDay, institutionCode, latId, lonId, timeId, ncid_out, vars, varVectorSize)
 
@@ -137,6 +145,8 @@ contains
 !            call check(nf90_get_att(nc2did_in, varId_in,"missing_value", undef2d))
             call check(nf90_def_var(ncid_out, trim(vars(i)%nameIn), NF90_REAL, (/lonId, latId, timeId/), vars(i)%id))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'standard_name', trim(vars(i)%nameIn)))
+            call check(nf90_put_att(ncid_out, vars(i)%id, 'long_name', trim(vars(i)%longName)))
+            call check(nf90_put_att(ncid_out, vars(i)%id, 'units', trim(vars(i)%units)))
             call check(nf90_put_att(ncid_out, vars(i)%id, 'coordinates', 'time, lat, lon'))
             call check(nf90_put_att(ncid_out, vars(i)%id, '_FillValue', undef2d))
             call closeFile(nc2did_in)

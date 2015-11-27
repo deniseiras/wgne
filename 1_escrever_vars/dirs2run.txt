@@ -1,3 +1,8 @@
-ncep   2d       dust            /home2/denis/magnitude/ncep/dust         pgbf*.ctl         /home2/denis/output
-ncep   3d       dust            /home2/denis/magnitude/ncep/dust         pgbf*.ctl         /home2/denis/output
-ncep   2d       dust            /home2/denis/magnitude/ncep/dust         aodf*.ctl         /home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_10u_*.ctl  	/home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_10v_*.ctl  	/home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_2t_*.ctl  	/home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_aod550_*.ctl  /home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_ssrd_*.ctl  	/home2/denis/output
+ecmwf   2d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_strd_*.ctl  	/home2/denis/output
+
+ecmwf   3d       dust_new        /home2/denis/magnitude/ecmwf/dust_new  macc_gau?_t_*.ctl  	/home2/denis/output

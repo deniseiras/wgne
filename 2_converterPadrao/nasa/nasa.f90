@@ -5,37 +5,39 @@ module nasa
     character(*), parameter :: institution='NASA/Goddard' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
     character(*), parameter :: institutionCode='nasa' !ECMWF, Japan Meteorological Agency, Météo France, NASA/Goddard, NCEP, NOAA
 
-!    character(*), parameter :: ccase='dust'
-     character(*), parameter :: ccase='smoke'
-!    character(*), parameter :: ccase='pollution'
 !    character(*), parameter :: subcase='interactive'
     character(*), parameter :: subcase='noaerosols'
 
+!dust
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
-!    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
-    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with no aerosol interaction.' !Case and Subcase
-!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
-!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
-!dust
+!    character(*), parameter :: ccase='dust'
 !    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 4, 13, 0, 0, 0), date_end   = GregorianDate(2012, 4, 23, 0, 0, 0)
 !    integer, parameter :: lonIn=193
 !    integer, parameter :: latIn=201
 !    integer, parameter :: levIn=15
 !    integer, parameter :: timeIn=81
+!    integer, parameter :: timeIn3d=81
 !smoke
-    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 9, 5, 0, 0, 0), date_end   = GregorianDate(2012, 9, 16, 0, 0, 0)
-    integer, parameter :: lonIn=193
-    integer, parameter :: latIn=241
-    integer, parameter :: levIn=15
-    integer, parameter :: timeIn=17
-    integer, parameter :: timeIn3d=6
-!pollution
-!    type(GregorianDate), parameter :: date_start = GregorianDate(2013, 1, 7, 0, 0, 0), date_end   = GregorianDate(2013, 1, 21, 0, 0, 0)
-!    integer, parameter :: lonIn=194
+!    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
+!    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with no aerosol interaction.' !Case and Subcase
+!    character(*), parameter :: ccase='smoke'
+!    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 9, 5, 0, 0, 0), date_end   = GregorianDate(2012, 9, 16, 0, 0, 0)
+!    integer, parameter :: lonIn=193
 !    integer, parameter :: latIn=241
 !    integer, parameter :: levIn=15
-!    integer, parameter :: timeIn=81
+!    integer, parameter :: timeIn=17
+!    integer, parameter :: timeIn3d=6
+!pollution
+!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
+    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
+    character(*), parameter :: ccase='pollution'
+    type(GregorianDate), parameter :: date_start = GregorianDate(2013, 1, 7, 0, 0, 0), date_end   = GregorianDate(2013, 1, 21, 0, 0, 0)
+    integer, parameter :: lonIn=194
+    integer, parameter :: latIn=241
+    integer, parameter :: levIn=15
+    integer, parameter :: timeIn=81
+    integer, parameter :: timeIn3d=81
 
     character(*), parameter :: inputBaseVarsDir='/stornext/online8/exp-dmd/outputcasevars/stornext/online8/exp-dmd/aerosols/'
     character(*), parameter :: outputBaseDir='/scratchout/grupos/brams/home/denis.eiras/new_aerosols'
@@ -46,15 +48,12 @@ module nasa
     integer, parameter :: vars3dVectorSize = 3
     integer, parameter :: varNameSize = 30
 
-    real(kind=8), dimension(timeIn3d) :: time_input
-    real(kind=8), dimension(lonIn) :: lon_input
-    real(kind=8), dimension(latIn) :: lat_input
-    real, dimension(levIn) :: lev_input
-
-    type var2dType
+   type var2dType
         character(len=varNameSize) nameIn
         real, dimension(lonIn,latIn,timeIn) :: value
         integer :: id
+	character(len=100) longName
+        character(len=10) units
     end type var2dType
 
     type var3dType
@@ -74,25 +73,67 @@ contains
         implicit none
 
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='bcmass'
-        vars(2)%nameIn='aeromass'
-        vars(3)%nameIn='dustmass'
-        vars(4)%nameIn='dlwf'
-        vars(5)%nameIn='ocmass'
-        vars(6)%nameIn='conv' !n tem no wgne_disp
-        vars(7)%nameIn='prec'
-        vars(8)%nameIn='so4mass'
-        vars(9)%nameIn='saltmass'
-        vars(10)%nameIn='dswf'
-        vars(11)%nameIn='temp2m'
-        vars(12)%nameIn='aod'
+        vars(1)%nameIn='aeromass'
+	vars(1)%longName='Total Aerosol Mass Column Integrated'
+	vars(1)%units='g/m^2'
+
+        vars(2)%nameIn='aod'
+	vars(2)%longName='Aerosol Optical Depth at 550nm'
+	vars(2)%units=''
+
+        vars(3)%nameIn='bcmass'
+	vars(3)%longName='Black Carbon Mass Column Integrated'
+	vars(3)%units='g/m^2'
+
+        vars(4)%nameIn='conv' !n tem no wgne_disp
+	vars(4)%longName='Precipitation (from Convective Parametrization)'
+	vars(4)%units='mm'
+
+        vars(5)%nameIn='dlwf'
+	vars(5)%longName='Longwave Downwelling Radiative Flux at the Surface'
+	vars(5)%units='W/m^2'
+        
+	vars(6)%nameIn='dswf'
+	vars(6)%longName='Shortwave Downwelling Radiative Flux at the Surface'
+	vars(6)%units='W/m^2'
+
+        vars(7)%nameIn='dustmass'
+	vars(7)%longName='Dust Aerosol Mass Column Integrated'
+	vars(7)%units='g/m^2'
+
+        vars(8)%nameIn='ocmass'
+	vars(8)%longName='Organic Carbon Column Mass Density'
+	vars(8)%units='g/m^2'
+
+        vars(9)%nameIn='prec'
+	vars(9)%longName='Total Precipitation'
+	vars(9)%units='mm'
+
+        vars(10)%nameIn='saltmass'
+	vars(10)%longName='Sea Salt Column Mass Density'
+	vars(10)%units='g/m^2'
+
+        vars(11)%nameIn='so4mass'
+	vars(11)%longName='SO4 Salt Column Mass Density'
+	vars(11)%units='g/m^2'
+
+        vars(12)%nameIn='temp2m'
+	vars(12)%longName='Temperature at 2m'
+	vars(12)%units='K'
+
         vars(13)%nameIn='wdir'
+	vars(13)%longName='Wind Direction at 10m'
+	vars(13)%units='degrees'
+
         vars(14)%nameIn='wmag'
+	vars(14)%longName='Wind Magnitude at 10m'
+	vars(14)%units='m/s'
 
     end subroutine
 
     subroutine initialize3dVars()
         implicit none
+
         allocate(vars3d(vars3dVectorSize))
         vars3d(1)%nameIn='ttend'
 	vars3d(1)%longName='tendency_of_air_temperature_due_to_radiation'

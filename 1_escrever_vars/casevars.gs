@@ -118,11 +118,11 @@ function main(args)
         endif
       endif
       if(centertype='ecmwf')
-        if(casetype='dust')
+        if(casetype='dust_new')
           if(dimType='2d')
-            fileout=genEcmwfDust(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+            fileout=genEcmwfDustNew(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
           else 
-            fileout=genEcmwfDust3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+            fileout=genEcmwfDustN3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
           endif
         endif
         if(casetype='smoke')
@@ -223,7 +223,7 @@ return fileout
 ************************************************************************
 * lê o arquivo de entrada e escreve as variaveis convertidas no padrao *
 ************************************************************************
-function genEcmwfDust(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+function genEcmwfDustNew(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
 
 * direct  
@@ -301,6 +301,7 @@ function genEcmwfDust(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,di
 
 return fileout
 
+
 ***********************************************************************
 * - lê o arquivo de entrada e escreve as variaveis convertidas no padrao
 ***********************************************************************
@@ -331,7 +332,7 @@ return fileout
 ***********************************************************************
 * - lê o arquivo de entrada 3d e escreve as variaveis convertidas no padrao
 ***********************************************************************
-function genEcmwfDust3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
+function genEcmwfDustN3d(pathIn,fileIn,filePattern,fileExt,outputPath,centertype,dimType)
   'reinit'
   fileNameAux=substr(fileIn,1,12)
   if(fileNameAux='macc_gaub_t_'|fileNameAux='macc_gau8_t_')

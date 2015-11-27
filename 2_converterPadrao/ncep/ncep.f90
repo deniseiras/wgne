@@ -4,18 +4,20 @@ module ncep
 
     character(*), parameter :: institution='NCEP'
     character(*), parameter :: institutionCode='ncep' 
+
 !    character(*), parameter :: ccase='dust'
 !    character(*), parameter :: ccase='smoke'
     character(*), parameter :: ccase='pollution'
-    character(*), parameter :: subcase='interactive'
-!    character(*), parameter :: subcase='noaerosols'
+
+!    character(*), parameter :: subcase='interactive'
+    character(*), parameter :: subcase='noaerosols'
 
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
 !    character(*), parameter :: comments='Dust storm on April 18, 2012. Forecast with no aerosol interaction.' !Case and Subcase
 !    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
-!    character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with no aerosol interaction.' !Case and Subcase
-    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
-!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
+!     character(*), parameter :: comments='Extreme biomass burning smoke in Brazil (the SAMBBA case). Forecast with no aerosol interaction.' !Case and Subcase
+!    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with aerosol interaction (direct and indirect effects).' !Case and Subcase
+    character(*), parameter :: comments='Extreme pollution in Beijing on January 1216, 2013. Forecast with no aerosol interaction.' !Case and Subcase
 
 !dust
 !    type(GregorianDate), parameter :: date_start = GregorianDate(2012, 4, 13, 0, 0, 0), date_end   = GregorianDate(2012, 4, 23, 0, 0, 0)
@@ -44,19 +46,19 @@ module ncep
     character(*), parameter :: caseDir = institutionCode//'/'//ccase//'/'//subcase
     character(*), parameter :: inputVarsDir=inputBaseVarsDir//'/'//caseDir
 
+! 8 com o AOD q so tem nos interactive
+!    integer, parameter :: varVectorSize = 8
+
     integer, parameter :: varVectorSize = 7
     integer, parameter :: vars3dVectorSize = 3
     integer, parameter :: varNameSize = 30
 
-    real(kind=8), dimension(timeIn) :: time_input
-    real(kind=8), dimension(lonIn) :: lon_input
-    real(kind=8), dimension(latIn) :: lat_input
-    real, dimension(levIn) :: lev_input
-
-    type var2dType
+   type var2dType
         character(len=varNameSize) nameIn
         real, dimension(lonIn,latIn,timeIn) :: value
         integer :: id
+	character(len=100) longName
+        character(len=10) units
     end type var2dType
 
     type var3dType
@@ -75,14 +77,38 @@ contains
     subroutine initialize2dVars()
         implicit none
         allocate(vars(varVectorSize))
-        vars(1)%nameIn='aod'
-        vars(2)%nameIn='conv'
-        vars(3)%nameIn='prec'
-        vars(4)%nameIn='dlwf'
-        vars(5)%nameIn='dswf'
-        vars(6)%nameIn='temp2m'
-        vars(7)%nameIn='wdir'
-        vars(8)%nameIn='wmag'
+!        vars(1)%nameIn='aod'
+!	vars(1)%longName='Aerosol Optical Depth at 550nm'
+!	vars(1)%units=''
+
+        vars(1)%nameIn='conv' !n tem no wgne_disp
+	vars(1)%longName='Precipitation (from Convective Parametrization)'
+	vars(1)%units='mm'
+
+        vars(2)%nameIn='dlwf'
+	vars(2)%longName='Longwave Downwelling Radiative Flux at the Surface'
+	vars(2)%units='W/m^2'
+        
+	vars(3)%nameIn='dswf'
+	vars(3)%longName='Shortwave Downwelling Radiative Flux at the Surface'
+	vars(3)%units='W/m^2'
+
+	vars(4)%nameIn='prec'
+	vars(4)%longName='Total Precipitation'
+	vars(4)%units='mm'
+
+        vars(5)%nameIn='temp2m'
+	vars(5)%longName='Temperature at 2m'
+	vars(5)%units='K'
+
+        vars(6)%nameIn='wdir'
+	vars(6)%longName='Wind Direction at 10m'
+	vars(6)%units='degrees'
+
+        vars(7)%nameIn='wmag'
+	vars(7)%longName='Wind Magnitude at 10m'
+	vars(7)%units='m/s'
+
     end subroutine
 
     subroutine initialize3dVars()
