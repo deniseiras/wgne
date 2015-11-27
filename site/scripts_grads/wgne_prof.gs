@@ -4,8 +4,10 @@
 'set display color white'
 'c'
 
-directory='/stornext/online8/exp-dmd/new_aerosols'
-str = 'nasa dust interactive temp 1 15 2012 04 13 00 15z13apr2012 35 30 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 15z13apr2012'
+* directory='/stornext/online8/exp-dmd/new_aerosols'
+* str = 'nasa dust interactive temp 1 15 2012 04 13 00 15z13apr2012 35 30 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 15z13apr2012'
+
+directory='/rede/tupa_expdmd/aerosols'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -35,7 +37,7 @@ fctOriginal=subwrd(str,18)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
 * Set up the filename.
-'sdfopen 'directory'/'model'/'mcase'/'scase'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
+'sdfopen 'directory'/'model'/'mcase'/r'hh'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
 
 if (hh=12 & model!=meteofrance)
   'close 1'

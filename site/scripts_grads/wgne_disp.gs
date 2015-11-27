@@ -1,13 +1,13 @@
 *args: partipicant case subcase variable level year month day hour forecast
-
 'reinit'
 'set mpdset hires'
 'set display color white'
 'c'
 
-directory='/stornext/online8/exp-dmd/new_aerosols'
+* directory='/stornext/online8/exp-dmd/new_aerosols'
+* str = 'nasa smoke interactive temp 1 2012 09 05 00 03z05sep2012 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 09z05sep2012'
 
-str = 'nasa smoke interactive temp 1 2012 09 05 00 03z05sep2012 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 09z05sep2012'
+directory='/rede/tupa_expdmd/aerosols'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -34,7 +34,7 @@ if (mcase=smoke); 'set mpdset brmap_hires'; endif
 
 
 * Set up the filename.
-'sdfopen 'directory'/'model'/'mcase'/'scase'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
+'sdfopen 'directory'/'model'/'mcase'/r'hh'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'
 'set time 'fct
 
 * Check for the presence of aerosols.
