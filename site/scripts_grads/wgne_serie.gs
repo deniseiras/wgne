@@ -7,7 +7,7 @@
 * directory='/stornext/online8/exp-dmd/new_aerosols'
 * str = 'nasa dust interactive temp 1 2012 04 13 00 35 30 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90'
 
-directory='/rede/tupa_expdmd/aerosols'
+directory='/rede/tupa_expdmd/new_aerosols'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -32,6 +32,31 @@ maxvalue=subwrd(str,14)
 interval=subwrd(str,15)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
+
+if (model=bsc)
+  modeltitle='BSC'
+endif
+if (model=ecmwf)
+  modeltitle='ECMWF'
+endif
+if (model=jma)
+  modeltitle='JMA'
+endif
+if (model=meteofrance)
+  modeltitle='Meteo France'
+endif
+if (model=ncep)
+  modeltitle='NCEP'
+endif
+if (model=nasa)
+  modeltitle='NASA'
+endif
+if (model=noaa)
+  modeltitle='NOAA'
+endif
+if (model=cptec)
+  modeltitle='CPTEC'
+endif
 
 * Set up the filename.
 'sdfopen 'directory'/'model'/'mcase'/r'hh'/'model'_'mcase'_'scase'_'yy''mm''dd''hh'00.nc'

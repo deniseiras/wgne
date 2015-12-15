@@ -7,7 +7,7 @@
 * directory='/stornext/online8/exp-dmd/new_aerosols'
 * str = 'nasa smoke interactive noaerosols temp2m 1 2012 09 05 00 0z07sep2012 default 0 0 0&ano=2013&mes=01&hr=2&rodada=00&mapext=-180+-90+180+90 0z07sep2012'
 
-directory='/rede/tupa_expdmd/aerosols'
+directory='/rede/tupa_expdmd/new_aerosols'
 
 * Participant's name.
 model=subwrd(str,1)
@@ -33,6 +33,31 @@ interval=subwrd(str,15)
 fctOriginal=subwrd(str,16)
 
 if (mcase=smoke); 'set mpdset brmap_hires'; endif
+
+if (model=bsc)
+  modeltitle='BSC'
+endif
+if (model=ecmwf)
+  modeltitle='ECMWF'
+endif
+if (model=jma)
+  modeltitle='JMA'
+endif
+if (model=meteofrance)
+  modeltitle='Meteo France'
+endif
+if (model=ncep)
+  modeltitle='NCEP'
+endif
+if (model=nasa)
+  modeltitle='NASA'
+endif
+if (model=noaa)
+  modeltitle='NOAA'
+endif
+if (model=cptec)
+  modeltitle='CPTEC'
+endif
 
 * Set up the filename.
 'sdfopen 'directory'/'model'/'mcase'/r'hh'/'model'_'mcase'_'minuend'_'yy''mm''dd''hh'00.nc'
@@ -125,6 +150,12 @@ if (mcase=smoke)
     flon=329.625
     ilat=-39.5943
     flat=19.9376
+  endif
+  if (model=cptec | model=noaa)
+    ilon=-90
+    flon=-30
+    ilat=-40
+    flat=20
   else
     ilon=270
     flon=330
