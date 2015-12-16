@@ -1,0 +1,29 @@
+bcmass=bccmass*1000
+
+aeromass=(bccmass+ducmass+occmass+so4cmass+sscmass)*1000
+
+dustmass=ducmass*1000
+
+dlwf=lwgnt*(-1)
+
+ocmass=occmass*1000
+
+conv=3*3600*preccon
+
+preclsc ?
+
+prec = 3*3600*prectot
+
+so4mass=so4cmass*1000
+
+saltmass=sscmass*1000
+
+dswf=swgnt
+
+temp2m=t2m
+
+aod=totexttau
+
+
+
+
