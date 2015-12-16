@@ -129,9 +129,9 @@ if (mcase=smoke)
     flat=19.9376
   else
     if (model=cptec)
-      ilon=-98
-      flon=-13
-      ilat=-46
+      ilon=-96
+      flon=-16
+      ilat=-42
       flat=18
     else
       if (model=noaa)

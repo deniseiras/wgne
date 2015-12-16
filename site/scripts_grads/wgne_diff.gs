@@ -150,17 +150,25 @@ if (mcase=smoke)
     flon=329.625
     ilat=-39.5943
     flat=19.9376
-  endif
-  if (model=cptec | model=noaa)
-    ilon=-90
-    flon=-30
-    ilat=-40
-    flat=20
   else
-    ilon=270
-    flon=330
-    ilat=-40
-    flat=20
+    if (model=cptec)
+      ilon=-96
+      flon=-16
+      ilat=-42
+      flat=18
+    else
+      if (model=noaa)
+        ilon=-100.278
+        flon=-19.7218
+        ilat=-36.0414
+        flat=18
+      else
+        ilon=270
+        flon=330
+        ilat=-40
+        flat=20
+      endif
+    endif
   endif
 endif
 
