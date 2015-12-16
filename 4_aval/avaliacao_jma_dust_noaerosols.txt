@@ -1,0 +1,1991 @@
+************************** VERIFICAR **********************************
+Verificar arquivo convertido não existente /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204130000.nc
+************************** VERIFICAR **********************************
+************************** VERIFICAR **********************************
+Verificar arquivo convertido não existente /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204140000.nc
+************************** VERIFICAR **********************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204150000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z15APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012041500.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041500.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041500.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204150000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204150000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012041500.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012041500.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012041500.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012041500.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012041500.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012041500.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041500.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041500.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204150000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204150000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 8.5e-05 interval 5e-06 
+Amplitude original de rh: 0.000135
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=7407407.40740741
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=66666666.6666667
+******************************************************************
+Contouring: 8e-05 to 0.0002 interval 1e-05 
+Amplitude original de rh: 0.00028
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=7142857.14285714
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=32142857.1428571
+******************************************************************
+Contouring: 8e-05 to 0.00018 interval 1e-05 
+Amplitude original de rh: 0.00026
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=3846153.84615385
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=34615384.6153846
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -70 to 10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=9.09090909090909
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -65 to 0 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=65, min/amplitude=65
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204160000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z16APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012041600.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041600.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041600.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204160000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204160000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012041600.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012041600.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012041600.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012041600.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012041600.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012041600.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041600.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041600.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204160000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204160000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 9e-05 interval 5e-06 
+Amplitude original de rh: 0.00014
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=14285714.2857143
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=64285714.2857143
+******************************************************************
+Contouring: 7e-05 to 0.00019 interval 1e-05 
+Amplitude original de rh: 0.00026
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=7692307.69230769
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=34615384.6153846
+******************************************************************
+Contouring: 8e-05 to 0.0002 interval 1e-05 
+Amplitude original de rh: 0.00028
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=3571428.57142857
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=32142857.1428571
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -80 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=80, min/amplitude=72.7272727272727
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -60 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=60, min/amplitude=60
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=70
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204170000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z17APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012041700.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041700.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041700.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204170000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204170000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012041700.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012041700.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012041700.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012041700.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012041700.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012041700.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041700.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041700.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204170000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204170000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 0.0001 interval 5e-06 
+Amplitude original de rh: 0.00015
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=13333333.3333333
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=60000000
+******************************************************************
+Contouring: 7e-05 to 0.00017 interval 1e-05 
+Amplitude original de rh: 0.00024
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=8333333.33333333
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=37500000
+******************************************************************
+Contouring: 7e-05 to 0.00018 interval 1e-05 
+Amplitude original de rh: 0.00025
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=4000000
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=36000000
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -80 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=80, min/amplitude=72.7272727272727
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=70
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 100 interval 10 
+Amplitude original de rh: 120
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=75
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=16.6666666666667
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204180000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z18APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012041800.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041800.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041800.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204180000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204180000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012041800.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012041800.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012041800.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012041800.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012041800.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012041800.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041800.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041800.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204180000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204180000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 0.00012 interval 1e-05 
+Amplitude original de rh: 0.00017
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=11764705.8823529
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=52941176.4705882
+******************************************************************
+Contouring: 8e-05 to 0.00017 interval 1e-05 
+Amplitude original de rh: 0.00025
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=8000000
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=36000000
+******************************************************************
+Contouring: 6e-05 to 0.00018 interval 1e-05 
+Amplitude original de rh: 0.00024
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=8333333.33333333
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=37500000
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -80 to 10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=80, min/amplitude=72.7272727272727
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=9.09090909090909
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -70 to 10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=70
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204190000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z19APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012041900.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041900.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012041900.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204190000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204190000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012041900.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012041900.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012041900.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012041900.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012041900.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012041900.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041900.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012041900.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204190000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204190000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 4e-05 to 0.00012 interval 1e-05 
+Amplitude original de rh: 0.00016
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=12500000
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=56250000
+******************************************************************
+Contouring: 8e-05 to 0.00016 interval 1e-05 
+Amplitude original de rh: 0.00024
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=8333333.33333333
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=37500000
+******************************************************************
+Contouring: 7e-05 to 0.0002 interval 1e-05 
+Amplitude original de rh: 0.00027
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=7407407.40740741
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=33333333.3333333
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=70
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -65 to 0 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=65, min/amplitude=65
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204200000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z20APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012042000.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042000.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204200000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204200000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012042000.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012042000.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012042000.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012042000.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012042000.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012042000.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042000.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204200000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204200000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 0.00014 interval 1e-05 
+Amplitude original de rh: 0.00019
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=10526315.7894737
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=47368421.0526316
+******************************************************************
+Contouring: 8e-05 to 0.00015 interval 1e-05 
+Amplitude original de rh: 0.00023
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=4347826.08695652
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=39130434.7826087
+******************************************************************
+Contouring: 8e-05 to 0.00019 interval 1e-05 
+Amplitude original de rh: 0.00027
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=7407407.40740741
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=33333333.3333333
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -70 to 20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=70
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=20
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204210000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z21APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012042100.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042100.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042100.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204210000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204210000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012042100.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012042100.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012042100.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012042100.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012042100.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012042100.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042100.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042100.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204210000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204210000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 5e-05 to 0.00012 interval 1e-05 
+Amplitude original de rh: 0.00017
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=5882352.94117647
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=52941176.4705882
+******************************************************************
+Contouring: 7e-05 to 0.00014 interval 1e-05 
+Amplitude original de rh: 0.00021
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=4761904.76190476
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=42857142.8571429
+******************************************************************
+Contouring: 8e-05 to 0.00021 interval 1e-05 
+Amplitude original de rh: 0.00029
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=3448275.86206897
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=31034482.7586207
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -60 to 5 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=60, min/amplitude=60
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=5, max/amplitude=5
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204220000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z22APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012042200.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042200.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042200.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204220000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204220000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012042200.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012042200.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012042200.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012042200.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012042200.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012042200.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042200.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042200.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204220000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204220000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 4.5e-05 to 0.00011 interval 5e-06 
+Amplitude original de rh: 0.000155
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=12903225.8064516
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=58064516.1290323
+******************************************************************
+Contouring: 7e-05 to 0.00014 interval 1e-05 
+Amplitude original de rh: 0.00021
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 10 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=10, min/amplitude=4761904.76190476
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=42857142.8571429
+******************************************************************
+Contouring: 8e-05 to 0.00021 interval 1e-05 
+Amplitude original de rh: 0.00029
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=6896551.72413793
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=31034482.7586207
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -65 to 0 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=65, min/amplitude=59.0909090909091
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -60 to 10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=60, min/amplitude=60
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -10 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=90
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=10, max/amplitude=10
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+dset /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204230000.nc
+title 
+undef -9.99e+33
+dtype netcdf
+xdef 107 linear 0 0.5625
+ydef 89 levels 0.28081 0.84243 1.40405 1.96568 2.5273 3.08892 3.65054 4.21216
+ 4.77379 5.33541 5.89703 6.45865 7.02027 7.58189 8.14352 8.70514 9.26676 9.82838
+ 10.39 10.9516 11.5133 12.0749 12.6365 13.1981 13.7597 14.3214 14.883 15.4446
+ 16.0062 16.5678 17.1295 17.6911 18.2527 18.8143 19.3759 19.9376 20.4992 21.0608
+ 21.6224 22.1841 22.7457 23.3073 23.8689 24.4305 24.9922 25.5538 26.1154 26.677
+ 27.2386 27.8003 28.3619 28.9235 29.4851 30.0468 30.6084 31.17 31.7316 32.2933
+ 32.8549 33.4165 33.9781 34.5397 35.1014 35.663 36.2246 36.7862 37.3478 37.9095
+ 38.4711 39.0327 39.5943 40.1559 40.7176 41.2792 41.8408 42.4024 42.9641 43.5257
+ 44.0873 44.6489 45.2105 45.7722 46.3338 46.8954 47.457 48.0186 48.5803 49.1419
+ 49.7035
+zdef 24 levels 1000 925 850 700 600 500 400 300
+ 250 200 150 100 70 50 30 20 15 10
+ 7 5 3 2 1 0.5
+tdef 80 linear 00Z23APR2012 180mn
+vars 9
+temp2m=>temp2m  0  t,y,x  temperature at 2m
+wdir=>wdir  0  t,y,x  wind direction at 10m
+wmag=>wmag  0  t,y,x  wind magnitude at 10m
+aod=>aod  0  t,y,x  aerosol optical depth at 550nm
+dustmass=>dustmass  0  t,y,x  dust aerosol mass column integrated
+dswf=>dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+dlwf=>dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+temp=>temp  24  t,z,y,x  temperature
+rh=>rh  24  t,z,y,x  relative humidity
+endvars
+
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_ta_2012042300.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042300.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_wdir_2012042300.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 1  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     wdir  0  t,y,x  10m-wind direction
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204230000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204230000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = wdir, com = 1 níveis
+com a função sobre a variável original ... wdir
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=1,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=41,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+Contouring: 50 to 350 interval 50 
+Amplitude original de wdir: 400
+define diferenca=wdir.2(t=80,z=1)-vardisp
+d diferenca
+Constant field.  Value = 0
+Diferenca = 0 ou todos valores undefined
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_u10_2012042300.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_od550aer_2012042300.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_loaddust*1000_2012042300.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dswb_2012042300.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_dlwb_2012042300.nc
+***********************************************************************
+************************** VERIFICAR **********************************
+Verificar arquivo original não existente /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_t_2012042300.nc
+***********************************************************************
+File 1 : 
+  Descriptor: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042300.nc
+  Binary: /stornext/online8/exp-dmd/aerosols/jma/dust/noaerosols/jma_rh_2012042300.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 1
+     rh  24  t,z,y,x  RELATIVE HUMIDITY                                %                1
+
+File 2 : 
+  Descriptor: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204230000.nc
+  Binary: /stornext/online8/exp-dmd/new_aerosols/jma/dust/r00/jma_dust_noaerosols_201204230000.nc
+  Type = Gridded
+  Xsize = 107  Ysize = 89  Zsize = 24  Tsize = 80  Esize = 1
+  Number of Variables = 9
+     temp2m  0  t,y,x  temperature at 2m
+     wdir  0  t,y,x  wind direction at 10m
+     wmag  0  t,y,x  wind magnitude at 10m
+     aod  0  t,y,x  aerosol optical depth at 550nm
+     dustmass  0  t,y,x  dust aerosol mass column integrated
+     dswf  0  t,y,x  shortwave downwelling radiative flux at the surface
+     dlwf  0  t,y,x  longwave downwelling radiative flux at the surface
+     temp  24  t,z,y,x  temperature
+     rh  24  t,z,y,x  relative humidity
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Comparando nova variável = rh, com = 24 níveis
+com a função sobre a variável original ... rh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contouring: 4.5e-05 to 0.00011 interval 5e-06 
+Amplitude original de rh: 0.000155
+define diferenca=rh.2(t=1,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=12903225.8064516
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=58064516.1290323
+******************************************************************
+Contouring: 7e-05 to 0.00015 interval 1e-05 
+Amplitude original de rh: 0.00022
+define diferenca=rh.2(t=41,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=9090909.09090909
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=40909090.9090909
+******************************************************************
+Contouring: 8e-05 to 0.00019 interval 1e-05 
+Amplitude original de rh: 0.00027
+define diferenca=rh.2(t=80,z=1)-vardisp
+d diferenca
+Contouring: 20 to 90 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=20, min/amplitude=7407407.40740741
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=90, max/amplitude=33333333.3333333
+******************************************************************
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=13)-vardisp
+d diferenca
+Contouring: -65 to 0 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=65, min/amplitude=59.0909090909091
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 90 interval 10 
+Amplitude original de rh: 100
+define diferenca=rh.2(t=41,z=13)-vardisp
+d diferenca
+Contouring: -60 to 0 interval 5 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=60, min/amplitude=60
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 10 to 100 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=13)-vardisp
+d diferenca
+Contouring: -70 to 0 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=70, min/amplitude=63.6363636363636
+******************************************************************
+ Diferenca do maior valor <= 1% - max=0, max/amplitude=0
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=1,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=41,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
+Contouring: 20 to 90 interval 10 
+Amplitude original de rh: 110
+define diferenca=rh.2(t=80,z=24)-vardisp
+d diferenca
+Contouring: -90 to -20 interval 10 
+************************** ERRO **********************************
+ Diferenca do menor valor > 1% - min=90, min/amplitude=81.8181818181818
+******************************************************************
+************************** ERRO **********************************
+ Diferenca do maior valor > 1% - max=20, max/amplitude=18.1818181818182
+******************************************************************
